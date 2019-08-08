@@ -171,7 +171,48 @@ YAML 比json 和xml更适合做配置文件
 1. 命令行
 2. jar包外的优先级高于jar包内的优先级，带profile的优先级高于不带profile的
 
-## 8.自动配置原理？------
+## 8.自动配置原理？
+
+配置文件能够添什么类就是来自于properties类
+
+springBoot会加载大量的自动配置类,我们再来看这个自动配置类中配置了那些组件；（只要我们要用的组件有，我们就不要配置了），给容器的配置文件指定这些属性的值；
+
+xxxAutoConfiguration:自动配置类
+
+```java
+@EnableConfigurationProperties({HttpProperties.class})protected static class StringHttpMessageConverterConfiguration {    private final Encoding properties;    protected StringHttpMessageConverterConfiguration(HttpProperties httpProperties) {        this.properties = httpProperties.getEncoding();    }
+```
+
+xxxProperties:封装配置文件中相关的属性
+
+```java
+@ConfigurationProperties(    prefix = "spring.http")
+```
+
+@Conditonxxx(条件判断类)（判断条件）
+
+条件成立才往容器内添加组件
+
+能配置的功能都来源于这个配置类
+
+自动配置类只有在一定的条件下才生效
+
+springboot 启动过程:
 
 
+
+```java
+1.@EnableAutoConfiguration ：开启自动配置
+2.@Import({AutoConfigurationImportSelector.class})：利用selector导入一些组件
+3.AutoConfigurationImportSelector.class
+    有获得配置文件信息的方法
+protected AutoConfigurationImportSelector.AutoConfigurationEntry getAutoConfigurationEntry(AutoConfigurationMetadata autoConfigurationMetadata, AnnotationMetadata annotationMetadata) {
+        if (!this.isEnabled(annotationMetadata)) {
+            return EMPTY_ENTRY;
+        } else {
+            AnnotationAttributes attributes = this.getAttributes(annotationMetadata);
+            List<String> configurations = this.getCandidateConfigurations(annotationMetadata, attributes);
+```
+
+在idea中用ymal文件配置默认没有提示
 
