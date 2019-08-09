@@ -216,3 +216,37 @@ protected AutoConfigurationImportSelector.AutoConfigurationEntry getAutoConfigur
 
 在idea中用ymal文件配置默认没有提示
 
+## 9.spring-boot mybaits
+
+committed step：
+
+1. add the critical configuration of databse ,url,password
+
+   mapper-location to the application.properties
+
+   1. mapper-location: classpath\*:Mapper/\*Mapper.xml
+
+      (must identify the names of each mapper configuration file)
+
+2. add the annotion in the mapper Interface
+
+   for example:
+
+   ````java
+   @Repository
+   @Mapper
+   public interface UserMapper {
+       public List<UserInfo> listAll();
+       public UserInfo selectByName(String username);
+       public void add(UserInfo userInfo);
+   
+   }
+   ````
+
+   
+
+   1. note:about @Repository:
+
+      As of Spring 2.5, this annotation also serves as a specialization of @Component, allowing for implementation classes to be autodetected through classpath scanning.
+
+3. same step with that in the ssm
