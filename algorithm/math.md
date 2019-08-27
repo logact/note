@@ -43,3 +43,9 @@
 8.NumberOf1Bits.java
 
 1.  use the quality in the 5th question.
+
+## question left
+
+1. the comment bit operation formula.
+2. the bitmap which use the bit to help us save the memory.
+
