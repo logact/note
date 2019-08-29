@@ -49,3 +49,30 @@
 1. the comment bit operation formula.
 2. the bitmap which use the bit to help us save the memory.
 
+
+
+## 2019.8.29
+
+1.AddDigits_258.java
+
+1. two method
+2. use the loop to monitor the process
+3. find the regulation that each result in the processing is have a difference of 9'times
+
+2.HappyNumber202.java
+
+1. when i initially get the problem i didn't get the key that to find the entry of the false result，递归过程中一定要注意好的结果和错误的结果的出口。
+2. 使用快慢指针找到过程重复的情况。
+
+3.MyPow_50.java
+
+1. 使用递归
+
+4.NimGame_292.java
+
+1. 借用递归思想和动态规划递推的思想就可以解出来。
+
+5.NthDigit.java
+
+1. 搜寻范围
+2. 找寻数学规律。
