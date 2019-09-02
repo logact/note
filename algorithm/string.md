@@ -13,3 +13,13 @@
       2. getOrDefault();
 3. 滑窗法
 
+## 待做的项
+
+1. 有限状态机[65. 有效数字](https://leetcode-cn.com/problems/valid-number/)编译原理
+
+
+
+## [67. Add Binary](https://leetcode-cn.com/problems/add-binary/)
+
+使用数组拼接字符串比StringBuffer快的多。
+
