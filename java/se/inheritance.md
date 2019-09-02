@@ -121,6 +121,200 @@
        1.  set()方法必须在已经加入值的位置添加值。
     4. list.toArray()
     5. list.remove(),staff.add(n,e);a
+    
+15. 对象包装器与自动装箱
+
+    1. 对象包装器的值是不可变的，如果设定了某个值那么这个值就不能在被改变（内部属性为final也没有提供过设置器）
+
+    2. 对象是final类禁止被继承。
+
+    3. 由于被封装在类中，ArrayList<Integer> 的效率远比int[] 低，所以它应当只用来构造小型集合。
+
+    4. 自动装箱与自动拆箱
+
+    5. 对于对象包装器：考察以下的代码：
+
+       ```java
+       Integer a=1000;
+       Integer b=1000;
+       if(a==b){
+           
+       }
+       //a==b通常不会成立但是有的时候也可能会成立（java将经常出现的值包装在一个对象中）
+       
+       ```
+
+    6. 自动装箱规范要求Boolean,byte，char<=127,介于-128~127之间的收人头和int被包装到固定的对象中。
+
+    7. 如果在条件表达式中混用不同的装箱类，那么就会自动向精度高的哪一个数提供转型。
+
+       ```java
+       Integer n=1;
+       Double x=2.0;
+       true?n:x;//由于编译器在检查类型时不能确定运算结果所以直接按最高精度的型
+       ```
+
+    8. 装箱与拆箱是由编译器认可的，而不是虚拟机。编译器在生成类的字节码是，插入必要的方法调用。虚拟机只是执行这些字节码。自动装箱和自动拆箱是编译器的动作与java虚拟机无关。
+
+    9. IntHolder :可以通过它来改变访问存储在其中的值。
+
+    10. 在方法的调用中（形参的传递中会自动实现拆装箱）
+
+    11. 在遍历如一个list中也能自动实现拆装箱。
+
+    12. 综上自动装箱的行为与合法的类型转换一致。
+
+16. 可变参数
+
+    1. since java se 5.0
+
+    2. 可变参数的定义方法
+
+       1. ```java
+          public PrintStream printf(String fmt,object...args){
+              return format(fmt,args);
+          }
+          
+          ```
+
+17. 枚举类
+
+    1. 枚举变量中定义的那些值都是实例
+
+       ```java
+       
+               Size a=Size.LARGE;//获得得的是一个常量所以枚举变量相比较的时候不必使用equals（）可以直接使用==
+               a.setParameter("hello");
+               System.out.println("a.getParameter()"+a.getParameter());
+               Size b=Size.LARGE;
+               System.out.println("b.getParameter()"+b.getParameter());
+               System.out.println("b==a"+(b==a));
+       ```
+
+       b.所有的枚举类型都继承字enum这个类
+
+       c.所有的枚举类型的构造器都强制为private(如果没有指定的话在一般的类中时default（包可见）但是在枚举类型中就会自动变成private)，由于枚举类型的所有构造器都是私有的所以它也不能被继承。
+
+    
 
 ## reflection
 
+1. 能够分析类能力的程序称为反射。
+
+2. 反射机制可以用来：
+
+   ```java
+   1.在运行时分析类的能力
+   2.在运行时查看对象
+   3.实现通用的数组操作代码
+   4.利用Method对象，例如c中的函数指针
+   ```
+
+3. 主要使用人员是工具构造者。
+
+4. 程序运行时系统始终为所有对象维护一个运行时的类型标识。虚拟机利用它来选择相应的方法来执行。
+
+5. 而Class 类就能够访问这些信息。
+
+6. java core 中介绍的一种另类的启动方法
+
+   ```java
+   1.在main函数中避免一切需要加载的类。
+   2.然后通过Class.forName()手动的加载类。
+   ```
+
+7. 获得Class 对象的几种方法。
+
+   1. 通过实例的getClass();
+
+   2. 通过全类名Class.forName("className");
+
+   3. 直接通过x.class(x可以是基本类型，数组)
+
+      ```java
+      size.getClass().getName():com.logact.Size
+      main.getClass().getName():com.logact.Main
+      s.getClass().getName():java.lang.String
+      i.getClass().getName():java.lang.Integer
+      int.classint
+      void.class.getName():void
+      int[].class.getName():[I//由于历史原因会返回奇怪的名字。
+      boss[].class.getName()[Lcom.logact.ParentAndSon.boss;
+      
+      ```
+
+      ```
+       Size size=Size.LARGE;
+              System.out.println("size.getClass().getName():"+size.getClass().getName());
+              System.out.println("main.getClass().getName():"+main.getClass().getName());
+              String s="fs";
+              System.out.println("s.getClass().getName():"+s.getClass().getName());
+              Integer i=1;
+              System.out.println("i.getClass().getName():"+i.getClass().getName());
+              System.out.println("int.class"+int.class);
+              System.out.println("void.class.getName():"+void.class.getName());
+              System.out.println("int[].class.getName():"+int[].class.getName());
+              System.out.println("boss[].class.getName()"+boss[].class.getName());
+      ```
+
+8. 一个class对象实际上表示的是一个类型，而这个类型未必一定是一个类。
+
+9. class对象是一个泛型类。（这点是怎么做到的呢？）
+
+10. 虚拟机为每一个类型管理一个泛型类。属于一个类的不同对象的地址是相同的。
+
+11. 构造方法不允许使用static修饰符
+
+13. 捕获异常：
+
+    1. 异常分为两种：
+       1. 已检查异常（由编译器负责）
+       2.  未检查一场（如空指针运行时的异常）
+    
+14. 获取类的结构：
+    
+    1. 使用getDeclared***()返回所有的状态的方法，域 ，构造器，不然只能返回由public修饰的方法，域，构造器。
+
+14. 通过反射在运行时查看某个参数的值
+
+    1. ```java
+       XXX obj=new XXX();
+       Class clz=Class.forName("className");
+       Field f =clz.getDeclaredFiled("FiledName");
+       Object v= f.get(XXX);
+       ```
+
+    2. 在这段代码中对域的设定依然会遵循Java安全机制。（private,public ,protected依然有效）
+
+    3. 反射机制的默认行为受限于Java访问控制。然而如果，一个Java程序没有收到安全管理器的控制，就可以覆盖访问控制。为了达到这个目的，可以调用Filed,Method或Construct对象的setAcessible方法。
+
+    4. 通过反射机制查看某个私有属性的值并给它设置值
+
+       ```java
+       Parent parent=new Parent("logact");
+               Class clz=parent.getClass();
+               Field f=clz.getDeclaredField("private_String");
+               f.setAccessible(true);
+               Object v=f.get(parent);
+               System.out.println(v);
+               f.set(parent,"taishan");
+               Object v1=f.get(parent);
+               System.out.println("after set by the filed set");
+               System.out.println(v1);
+       
+       ```
+
+    5. 对与final 修饰的变量即使使用Java反射也不能将它的值真正的改变。而private的修饰的变量却可以真正的改变。
+
+15. 关于泛型的toString方法
+    1. 使用ObjectAnalyzer避免对泛型对象避免tostring方法被一直递归使用。 
+
+​    
+
+​    
+
+​    
+
+​    
+
+​    
