@@ -112,3 +112,70 @@
 
 
 
+## 2019.9.4
+
+## [60. 第k个排列](https://leetcode-cn.com/problems/permutation-sequence/)
+
+1. 使用回溯算法。并用一个变量记录当前已经找到了第几个数。（速度较慢。）
+
+2. 找规律（ren）（在Java中新创建的一个字符串如果没有被赋值那么他的值就为ascll码值为0的字符不可用null去比较字符因为字符是基本类型）（以后再找规律吧）
+
+3. 找规律的错解（当k与（n-k-1）的阶乘余数为零的时候结果时最后的一个解而不是第一个解所以 不是让剩下没用的元素逐一插进去）
+
+   ```java
+      public String getPermutation(int n, int k) {
+           char[]res=new char[n];
+           for(char c:res){
+               System.out.println((int)c);
+           }
+           int index=0;
+           int count=0;
+           boolean[] used=new boolean[n];
+           while(index<n){
+               System.out.println("index:"+index);
+               System.out.println("n"+n);
+               int factorial=f(n-index-1);
+               int i=k/factorial;
+               if(i%factorial==0){
+                   System.out.println("susc");
+                   for(int j=1;j<=n;j++){
+                       if(!used[j-1]){
+                             System.out.println("succ:f:"+(char)(j+(int)'0'));
+                           res[index++]=(char)(j+(int)'0');
+                         
+                       }
+                   }
+                   break;
+               }
+               k=k-factorial*(i+1);
+               for(int i1=1;i1<=n;i1++){
+                   if(!used[i1-1]){
+                       count++;
+                       if(count==i+1){
+                           res[index++]=(char)(i1+(int)'0');
+                           System.out.println(res[index-1]);
+                           used[i1-1]=true;
+                           break;
+                       }
+                   }
+               }
+                   
+           }
+           return new String(res);
+    
+       }
+       public int f(int n){
+           if(n==0)return 1;
+           else return n*f(n-1);
+       }
+   ```
+
+4. 这个数在构造的时候应该先将初始值k减一（因为余数的关系）
+
+
+
+
+
+[
+  ](https://leetcode-cn.com/problems/permutation-sequence/)
+

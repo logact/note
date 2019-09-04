@@ -195,7 +195,13 @@
 
        c.所有的枚举类型的构造器都强制为private(如果没有指定的话在一般的类中时default（包可见）但是在枚举类型中就会自动变成private)，由于枚举类型的所有构造器都是私有的所以它也不能被继承。
 
-    
+18. 父类子类构造时代码执行的顺序：
+
+    1. 父类静态代码块（只要掉用了该类的静态方法就会被触发（第一次使用这个类就会触发，但是如果只是声明则不会））
+    2. 子类静态代码块。
+    3. 在执行Son son = new Son();时会先执行父类的代码块，在执行父类的构造方法主体。
+    4. 执行子类代码块和子类构造方法主体。
+    5. 无论是静态代码块还是代码块都只会被触发一次，普通代码块会在每次构造新的对象时触发。
 
 ## reflection
 
@@ -307,7 +313,63 @@
     5. 对与final 修饰的变量即使使用Java反射也不能将它的值真正的改变。而private的修饰的变量却可以真正的改变。
 
 15. 关于泛型的toString方法
+    
     1. 使用ObjectAnalyzer避免对泛型对象避免tostring方法被一直递归使用。 
+    
+16. 用反射来编写泛型数组。
+
+    1. 问题：java会记住每一个数组的类型(记住的是在Java new这一句时就记住了这个时候的类型)
+
+    2. 注意下面两句这样很奇怪的现象？？？？（涉及泛型以后再做）
+
+       ```java
+             a = (Item[]) new Object[2];
+       //应用泛型时这时正确的
+               a = (int[])new Object[2];
+       //明确指定类型时只是错误的。
+       ```
+
+    3. 下面的转型会造成运行时异常(向下转型是运行是错误)
+
+       ```java
+          Son[] sons=(Son[])new Object[2];
+               Son[] sons1=(Son[])new Object();
+       ```
+
+    4. 扩充任意类型数组的通用代码（使用反射机制获取这个数组的类型）
+
+       ```java
+       /**
+       这个方法似乎与Arrays.copyof的结果是一样的
+       */
+       public static Object goodCopyOf(Object a,int newLength){
+               Class c1=a.getClass();
+               if(!c1.isArray())return null;
+               Class componentType=c1.getComponentType();
+               int length= Array.getLength(a);
+               Object newArray=Array.newInstance(componentType,newLength);
+               System.arraycopy(a, 0, newArray, 0, Math.min(length,newLength));
+               return newArray;
+           }
+       
+       ```
+
+    5. 反射中的调用任意的方法（这种做法是极具隐患的）
+
+17. java继承种的建议：
+
+    1. protected的使用：
+
+       1. 不要使用这个修饰符去修饰变量，但是对于专门提供给子类重新定义的方法是一个很好的选择。
+
+    2. 除非所有继承的方法都有意义不然就不要使用继承。
+
+       1. LocalDate is immutable （它是用final来修饰的）
+       2. 扩展localDate???(java core)
+
+    3. 覆盖方法的是时候应该符合置换原则：
+
+       
 
 ​    
 
