@@ -203,7 +203,10 @@
    如果接口声明了一个覆盖java.lang.Object的全局方法之一的抽象方法，那么它不会计入接口的抽象方法数量中，a因为接口的任何实现都将具有java.lang.Object或其他地方的实现。因为任何一个类都继承自Object这个类所以任意一个类都最少有这个Object类public方法的实现。但是有个问题它为什么要这么做呢？
    ```
 
-   
+10. ```java
+    泛型与lambda的类型推定十分重要
+    PriorityQueue p;p=new PriorityQueue<Integer>(( x, y)->y-x);//泛型与lambda的类型推定十分重要
+    ```
 
 ## 内部类
 

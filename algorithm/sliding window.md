@@ -327,3 +327,104 @@ public double[] medianSlidingWindow(int[] nums, int k) {
 
 
 
+## [295. 数据流的中位数](https://leetcode-cn.com/problems/find-median-from-data-stream/)
+
+### 1.使用插入排序
+
+但是插入排序操作不太熟练。练习插入排序。
+
+```java
+ int  i=1;
+        int i1=2;
+        System.out.println((i+i1)/2.0);
+//这个算式是先将（i+i1）转为double的
+```
+
+### 2.使用两个堆(重点)
+
+首先两个堆一起要存入所有的数据（因为无法预知下一次的数据对中位数的排布会产生声明影响）
+
+```java
+class MedianFinder {
+    private int count;
+    private PriorityQueue<Integer> maxHeap;
+    private PriorityQueue<Integer> minHeap;
+
+    /** initialize your data structure here. */
+    public MedianFinder() {
+        count=0;
+        minHeap =new PriorityQueue();
+        maxHeap = new PriorityQueue<Integer>((x, y) -> y - x);
+    }
+    
+    public void addNum(int num) {
+        count++;//如果这里放在后面的话会在第一个输入插入造成空值针异常
+        maxHeap.add(num);
+        minHeap.add(maxHeap.poll());
+        if((count&1)==1){//两边的数量相等。
+            maxHeap.add(minHeap.poll());
+        }
+        
+        
+    }
+
+    public double findMedian() {
+        if((count&1)==0){//判断一个树是不是偶数不要ba&写成%
+            System.out.println(2);
+            return (maxHeap.peek()+minHeap.peek())/2.0;
+            
+        }else{
+            System.out.println(1);
+            return maxHeap.peek();
+            
+        }
+    }
+}
+
+```
+
+## [480. 滑动窗口中位数](https://leetcode-cn.com/problems/sliding-window-median/)
+
+如上题使用两个优先队列（注意维护细节）,需要判断int溢出的情况
+
+```java
+class Solution {
+    public double[] medianSlidingWindow(int[] nums, int k) {
+        double[] res =new double[nums.length-k+1];
+        PriorityQueue<Double> maxQ=new PriorityQueue<Double>((x,y)->(int)(y-x));
+        PriorityQueue<Double> minQ=new PriorityQueue<Double>();
+        for(int i=0;i<k;i++){
+            maxQ.offer((double)nums[i]);
+            minQ.offer((double)maxQ.poll());
+            if(maxQ.size()<minQ.size()){
+                maxQ.offer((double)minQ.poll());
+            }
+        }
+        res[0]=getMedian(maxQ,minQ);
+        for(int i=k;i<nums.length;i++){
+            maxQ.offer((double)nums[i]);
+            minQ.offer(maxQ.poll());
+            if(maxQ.size()<minQ.size()){
+                maxQ.offer(minQ.poll());
+            }
+            if(maxQ.contains(nums[i-k])){
+                maxQ.remove((double)nums[i-k]);
+            }else{
+                minQ.remove((double)nums[i-k]);
+            }
+            if(maxQ.size()-minQ.size()==2){
+                minQ.offer(maxQ.poll());
+            }else if(maxQ.size()<minQ.size()){
+                maxQ.offer(minQ.poll());
+            }
+            res[i-k+1]=getMedian(maxQ,minQ);
+        }
+        return res;
+    }
+    private double getMedian(PriorityQueue<Double> maxQ,PriorityQueue<Double> minQ){
+        if(maxQ.size()==minQ.size())return (maxQ.peek()+minQ.peek())/2.0;
+        return maxQ.peek();
+    }
+}
+```
+
