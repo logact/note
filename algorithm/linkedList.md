@@ -56,3 +56,139 @@
 
 
 
+## [725. 分隔链表](https://leetcode-cn.com/problems/split-linked-list-in-parts/)
+
+中等难度
+
+分组问题除数余数（这点没考虑好）
+
+```java
+class Solution {
+    public ListNode[] splitListToParts(ListNode root, int k) {
+        int len=0;
+        ListNode[] res=new ListNode[k];
+        for(ListNode p=root;p!=null;p=p.next){
+            len++;
+        }
+        int base=len/k;
+        int extra=len%k;
+        ListNode p=root;
+        for(int i=0;i<k;i++){
+            int sum=0;
+            if(extra>0){
+                sum =base +1;
+                extra--;
+            }else{
+                sum =base;
+            }
+            ListNode aRes=p;
+            sum--;
+            while(p!=null&&sum>0){
+                p=p.next;
+                sum--;
+            }
+            if(p!=null){
+                ListNode temp=p.next;
+                p.next =null;
+                p=temp;
+            }
+            res[i]=aRes;
+        }
+        return res;
+    }
+}
+
+```
+
+## [61. 旋转链表](https://leetcode-cn.com/problems/rotate-list/)
+
+链表中倒数第k个节点
+
+## [430. 扁平化多级双向链表](https://leetcode-cn.com/problems/flatten-a-multilevel-doubly-linked-list/)
+
+看上去有点像二叉树，也有点像图的深度优先搜索。
+
+使用一个显示栈来保存遍历中的节点（如这种递归或者用栈的题应该先要想清程序运行过程）要想到什么变量是符合栈的行为的。
+
+方法二递归解法（这个题的递归解法很难理解更适合用显示的stack）
+
+ 运行时间很慢有其它的解法吗?
+
+```java
+class Solution {
+    public Node flatten(Node head) {
+        Stack<Node> stack=new Stack<>();
+        Node p=head;
+        Node tail=null;
+        while(!stack.isEmpty()||p!=null){
+            if(p==null)p=stack.pop();
+            if(tail==null){
+                tail=p;
+            }
+            else{
+                 tail.next=p;
+                 p.prev=tail;
+                 tail=p;
+            }
+            if(p.next!=null)stack.push(p.next);
+            Node child=p.child;
+            p.child=null;
+            p=child;//应该将所有的孩子节点置为空
+            
+        }
+        return head;
+        
+    }
+}
+```
+
+递归的解法
+
+```java
+class Solution {
+    public Node flatten(Node head) {
+        if (head == null) {
+            return null;
+        }
+        dfs(head);
+        head.prev = null;
+        return head;
+    }
+
+    /**
+     * 展开链表，展开后链表的头结点的 prev 指向尾结点
+     *
+     * @param head 头结点
+     * @return 展开后链表的头结点
+     */
+    private Node dfs(Node head) {
+        Node cur = head;
+        while (cur != null) {
+            head.prev = cur;    // 更改头结点的 prev 指向尾结点
+            Node next = cur.next;
+            if (cur.child != null) {
+                Node h = dfs(cur.child);
+                cur.child = null;
+                Node t = h.prev;//这个t就是返回节点的末尾节点
+                // 链接 cur、h、t、next
+                cur.next = h;
+                h.prev = cur;
+                t.next = next;
+                if (next != null) {
+                    next.prev = t;
+                }
+                head.prev = t;  // 更改头结点的 prev 指向尾结点
+            }
+            cur = next;
+        }
+        return head;
+    }
+}
+
+```
+
+```java
+//用递归的解的思路：
+首先需要接受到以子节点（child）为头节点，处理后的头节点其次还需要这个结果的最末尾节点（依然这一层的next节点能够连接）（或得这个末尾节点就很有技巧性），让这个末尾节点指向next节点。
+```
+
