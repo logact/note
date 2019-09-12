@@ -165,7 +165,158 @@ class Solution {
 
 ## [474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/)（待做）
 
-1.解法一:用全排列将所有的组合（m个0，n个1组成）但是这样有问题，本来的方案是将这个数组选的时候化为三种状态选零选一，不选。但是这样情况有重叠。	这样转换为了另一种全排列。（长度不相同的全排列）（这比较复杂还要考虑几个一几个零的多种情况在同一个长度内）
+1.解法一:用全排列将所有的组合（m个0，n个1组成）但是这样有问题，本来的方案是将这个数组选的时候化为三种状态选零选一，不选。但是这样情况有重叠。	这样转换为了另一种全排列。（长度不相同的全排列）（这比较复杂还要考虑几个一几个零的多种情况在同一个长度内）（暂时做不出来用这种方法找不到所有长度的全部组合）
+
+2.有点像多重背包
+
+3.这是一道多重背包的问题（物体是字符串）而01的数量看成是两个维度的限制。
+
+4.这个题的初始化动态规划的初始状态可以从第一个参与计算的数值进行推算如本题会直接利用到dp00 的情况是dpij =max(dpij,dp i-czero j-cone)这个如果让初始值dp00 为一那么这个值就会等于二明显不符和题意。
+
+```java
+class Solution {
+    public int findMaxForm(String[] strs, int m, int n) {
+        if(strs.length==0)return 0;
+        int dp[][] =new int [m+1][n+1];
+    //    dp[0][0]=1;
+        for(String str:strs){
+            int countZero=0;
+            int countOne=0;
+            for(int i=0;i<str.length();i++){
+                if(str.charAt(i)=='1'){
+                    countOne++;
+                }else{
+                    countZero++;
+                }
+            }
+            if(countOne>n||countZero>m)continue;
+            for(int i=m;i>=countZero;i--){
+                for(int j=n;j>=countOne;j--){
+                  dp[i][j]=Math.max(dp[i][j],dp[i-countZero][j-countOne]+1);
+                }
+            }
+        }
+        return dp[m][n];
+    }
+}
+
+
+```
+
+## [1049. 最后一块石头的重量 II](https://leetcode-cn.com/problems/last-stone-weight-ii/)（more）
+
+​	Method 1：每次让数组中两个最大的值相减。	一直这样减到只有数组中只有一个数或者没有数字（但是这样好像不能够覆盖所有情况）
+
+错误的案例
+
+```none
+[31,26,33,21,40] 输出 9 预期 5
+```
+
+method 2:零一背包需要做一点转换，如前面的一道题一样，将其分成两个部分。
+
+method 3:
+
+```java
+class Solution {
+    public int lastStoneWeightII(int[] stones) {
+        if(stones.length==0)return 0;
+        int r=stones.length-1;
+        while(r>0){
+            int max=Integer.MIN_VALUE;
+            for(int i=0;i<=r;i++){
+                if(stones[i]>stones[max])max=i;
+            }
+            int v1=stones[max];
+            swap(stones,max,r--);
+            max=Integer.MIN_VALUE;
+            for(int i=0;i<=r;i++){
+                if(stones[i]>stones[max])max=i;
+            }
+            int v2=stones[max];
+            swap(stones,max,r);
+            if(v1==v2)r--;
+            else{
+                stones[r]=Math.abs(v1-v2);
+            }
+            
+            
+        }
+        if(r<0)return 0;
+        return stones[0];
+    }
+}
+```
+
+
+
+## [132. 分割回文串 II](https://leetcode-cn.com/problems/palindrome-partitioning-ii/)
+
+## [518. 零钱兑换 II](https://leetcode-cn.com/problems/coin-change-2/)
+
+直接套用零一被背包的模型：但是这个是可以重复选的（这个模型只能应对数组中的数都不一样而且都只能用一次）
+
+那这样看待的话这个就是一个完全背包问题。出错的地方是递推方程写错了。初始值应该设为一，如果没有目标金额可选的货币为空时这个方案数字应为1.
+
+```java
+class Solution {
+    public int change(int amount, int[] coins) {
+        //容量是amout
+        int [] dp=new int[amount+1];
+        for(int v:coins){
+            for(int i=amount;i>=v;i--){
+                dp[i]=Math.max(dp[i],dp[i-v]+1);
+            }
+        }
+        return dp[amount];
+    }
+}
+```
+
+```java
+class Solution {
+    public int change(int amount, int[] coins) {
+        //容量是amout
+        int [] dp=new int[amount+1];
+        dp[0]=1;
+        for(int v:coins){
+            for(int i=v;i<=amount;i++){
+                dp[i]=dp[i]+dp[i-v];//寻找到第i件物品的时候组合方式就是不选这个的加上选上这个的。
+            }
+        }
+        return dp[amount];
+    }
+}
+```
+
+
+
+## 337：
+
+## 39
+
+## [322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)（fail)
+
+```java
+class Solution {
+    public int coinChange(int[] coins, int amount) {
+        int[] dp=new int[amount+1];
+        for(int i=1;i<dp.length;i++){
+            dp[i]=1;
+        }
+        
+        for(int v:coins){
+            for(int i=v;i<=amout;i++){
+                dp[i]=Math.min(dp[i],dp[i-v]+1);
+            }
+        }
+        return dp[amout];
+        
+    }
+}		
+```
+
+
 
 
 
