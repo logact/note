@@ -293,9 +293,160 @@ class Solution {
 
 ## 337：
 
-## 39
+## [39. 组合总和](https://leetcode-cn.com/problems/combination-sum/):	
+
+回溯算法（error）
+
+这个题使用回溯算法的关键：
+
+1. 没有重复元素
+2. 每个元素都可以无限次被选
+3. 每个元素如果每次递归过程都可以被选那么就会出现重复的情况。
+
+使用动态规划。
+
+```java
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<Integer> list=new ArrayList<>();
+        List<List<Integer>>  res =new ArrayList<List<Integer>> ();
+        help(candidates,list,res,target);
+        return res;
+        
+    }
+    public void help(int [] candidates,List<Integer>list,List<List<Integer>> res,int target){
+        if(target<0)return;
+        if(target==0){
+            for(List<Integer> aList : res){
+                if(list.size()==aList.size()&&list.containsAll(aList)){
+                    return;//554,555
+                }
+            }
+            res.add(list);
+            return;
+        }
+        for(int i= 0;i<candidates.length;i++){
+            int v=candidates[i];
+            List<Integer> copy= new ArrayList<>(list);
+            copy.add(v);
+            help(candidates,copy,res,target-v);
+        }
+    }
+}
+```
+
+```java
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+        List<Integer> list=new ArrayList<>();
+        List<List<Integer>>  res =new ArrayList<List<Integer>> ();
+        help(candidates,list,res,target);
+        return res;
+        
+    }
+    public void help(int [] candidates,List<Integer>list,List<List<Integer>> res,int target){
+        if(target<0)return;
+        if(target==0){
+            for(List<Integer> aList : res){
+                if(list.size()==aList.size()&&list.containsAll(aList)&&aList.containsAll(list)){//这样不能保证所有的解是相同的。这样也不能保证这两个集合的元素相同数量一一对应。
+                    return;
+                }
+            }
+            res.add(list);
+            return;
+        }
+        for(int i= 0;i<candidates.length;i++){
+            int v=candidates[i];
+            List<Integer> copy= new ArrayList<>(list);
+            copy.add(v);
+            help(candidates,copy,res,target-v);
+        }
+    }
+}
+```
+
+真正的回溯解法
+
+```java
+class Solution {
+    public List<List<Integer>> combinationSum(int[] candidates, int target) {
+    
+        List<List<Integer>>  res=new ArrayList<>();
+        Arrays.sort(candidates);
+        List<Integer> list=new ArrayList<>();
+        helper(candidates,target,res,list,0);
+        return res;
+    }
+    public void helper(int [] candidates,int target,List<List<Integer>>res,List<Integer> list, int start){
+    
+        
+        if(target<0)return;
+        if(target==0){
+            List<Integer> copy =new ArrayList<>(list);
+            res.add(copy);
+            return;
+        }
+        for(int i=start;i<candidates.length;i++){
+            list.add(candidates[i]);
+            helper(candidates,target-candidates[i],res,list,i);
+            list.remove(list.size()-1);
+        }
+    }
+}
+```
+
+动态规划的解
+
+```java
+class Solution {
+  public List<List<Integer>> combinationSum(int[] candidates, int target) {
+      List<List<Integer>> result = new ArrayList<>();
+      Map<Integer,Set<List<Integer>>> map = new HashMap<>();
+      //对candidates数组进行排序
+      Arrays.sort(candidates);
+      int len = candidates.length;
+      for(int i = 1;i <= target;i++){
+          //初始化map
+          map.put(i,new HashSet<>());
+          //对candidates数组进行循环
+          for(int j = 0;j < len&&candidates[j] <= target;j++){
+              if(i == candidates[j]){
+                  //相等即为相减为0的情况，直接加入set集合即可
+                  List<Integer> temp = new ArrayList<>();
+                  temp.add(i);
+                  map.get(i).add(temp);
+              }else if(i > candidates[j]){
+                  //i-candidates[j]是map的key
+                  int key = i-candidates[j];
+                  //使用迭代器对对应key的set集合进行遍历
+                  //如果candidates数组不包含这个key值，对应的set集合会为空，故这里不需要做单独判断
+                  for(Iterator iterator = map.get(key).iterator();iterator.hasNext();){
+                      List list = (List) iterator.next();
+                      //set集合里面的每一个list都要加入candidates[j]，然后放入到以i为key的集合中
+                      List tempList = new ArrayList<>();
+                      tempList.addAll(list);
+                      tempList.add(candidates[j]);
+                      //排序是为了通过set集合去重
+                      Collections.sort(tempList);
+                      map.get(i).add(tempList);
+                  }
+              }
+          }
+      }
+      result.addAll(map.get(target));
+      return result;
+  }
+}
+
+```
+
+这里可以看出动态规划与回溯之间是一对一的关系，回溯是自顶向下的而动态规划自下向上的。
 
 ## [322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)（fail)
+
+这个题不能理解为一个完全背包问题。
+
+用上回溯方法优化中的问题。（先写出递推方程）
 
 ```java
 class Solution {
@@ -314,6 +465,254 @@ class Solution {
         
     }
 }		
+```
+
+## [120. 三角形最小路径和](https://leetcode-cn.com/problems/triangle/)
+
+Method1：回溯找出所有的路径,时间复杂度为n的阶乘，超时。在triangele.size()=196.
+
+这种适用于寻找所有的路径其实不适合本题，本题具有明显的递推性质
+
+```java
+class Solution {
+    int res;
+    public int minimumTotal(List<List<Integer>> triangle) {
+        //这是nim
+        res=Integer.MAX_VALUE;
+        helper(triangle,0,Integer.MAX_VALUE,-1);
+        return res;
+        
+    }
+    /**
+    index是层数
+    temp是中间值
+    selected 上一个被选的值
+    */
+    public void  helper(List<List<Integer>>triangle, int index,int temp,int selected){//如果用把中间值用参数存起来那么就不容易发现重复的子问题。
+        if(index==triangle.size()){
+            System.out.println(triangle.size());
+            res = Math.min(res,temp);
+            return;
+        }
+        List<Integer> curList =  triangle.get(index);
+        if(selected==-1){
+            int v= curList.get(0);
+            helper(triangle,index+1,v,0);
+        }else{
+            int candidate1 = selected;
+            int candidate2 = selected+1;
+            helper(triangle,index+1,temp+curList.get(candidate1),candidate1);
+            if(candidate2<curList.size()){
+                helper(triangle,index+1,temp+curList.get(candidate2),candidate2);
+               
+            }
+
+        }
+    }
+}
+```
+
+另一种递归(注意这种回溯算法的形式)这种写法在这道题更好。
+
+```java
+public int minimumTotal(List<List<Integer>> triangle) {
+    row=triangle.size();
+    return helper(0,0, triangle);
+}
+private int helper(int level, int c, List<List<Integer>> triangle){
+    // System.out.println("helper: level="+ level+ " c=" + c);
+    if (level==row-1){
+        return triangle.get(level).get(c);
+    }
+    int left = helper(level+1, c, triangle);//这两个参数可能遇到重复的情况。把这两个存起来。。。。
+    int right = helper(level+1, c+1, triangle);
+    return Math.min(left, right) + triangle.get(level).get(c);
+}
+改进,避免重复计算
+
+自顶向下, 记忆化搜索 【AC】
+int row;
+Integer[][] memo;
+
+public int minimumTotal(List<List<Integer>> triangle) {
+    row = triangle.size();
+    memo = new Integer[row][row];
+    return helper(0,0, triangle);
+}
+private int helper(int level, int c, List<List<Integer>> triangle){
+    // System.out.println("helper: level="+ level+ " c=" + c);
+    if (memo[level][c]!=null)
+        return memo[level][c];
+    if (level==row-1){
+        return memo[level][c] = triangle.get(level).get(c);
+    }
+    int left = helper(level+1, c, triangle);
+    int right = helper(level+1, c+1, triangle);
+    return memo[level][c] = Math.min(left, right) + triangle.get(level).get(c);
+}
+
+```
+
+DP 。。。。
+
+如果之前的理解是在第二种回溯的基础上那么就很容易得出这个。
+
+效果有点不好
+
+```java
+执行用时 :
+462 ms, 在所有 Java 提交中击败了5.06%的用户
+内存消耗 :49 MB, 在所有 Java 提交中击败了5.00%的用户
+```
+
+
+
+```java
+class Solution {
+    public int minimumTotal(List<List<Integer>> triangle) {
+        int dp[] =new int [triangle.get(triangle.size()-1).size()] ;
+        dp [0]=triangle.get(0).get(0);
+        System.out.println(dp[0]);
+        for(int i=1;i<triangle.size();i++){//深度方向的遍历.
+            List<Integer> curList = triangle.get(i);
+            for(int j=curList.size()-1;j>=0;j--){//横向遍历。。
+                int candidate1= j==curList.size()-1?Integer.MAX_VALUE:dp[j]+curList.get(j);
+                int candidate2 = j==0?Integer.MAX_VALUE:dp[j-1]+curList.get(j);
+                System.out.println("*********");
+                System.out.println(candidate1+"cnadidate1");
+                System.out.println(candidate2+"candidate2");
+                System.out.println("**********");
+                dp[j] =Math.min(candidate1,candidate2);
+            }
+        }
+        int res =Integer.MAX_VALUE;
+        for(int e:dp){
+            res = Math.min(res,e);
+        }
+        return res;
+    }
+}
+```
+
+## [198. 打家劫舍](https://leetcode-cn.com/problems/house-robber/)
+
+```java
+class Solution {
+    public int rob(int[] nums) {
+        int[] dp = new int [nums.length+1];
+        if(nums.length==0)return 0;
+        dp[0]=0;
+        dp[1]=nums[0];
+        if(nums.length==1)return dp[1];
+        for(int i=2;i<=nums.length;i++){
+            dp[i]=Math.max(dp[i-2]+nums[i-1],dp[i-1]);
+        }
+        return dp[nums.length];
+            
+    }
+}
+```
+
+```java
+//递归写法
+class solution{
+    public  int rob(int[] nums){       
+        return helper(nums.length-1,nums);
+    }
+    public int  helper(int index, int[] nums){
+        
+        if(index==1) return nums[1];
+        if(index==0)return nums[0];
+        int candidate1 = helper(index-1,nums);
+        int  candidate2 =helper(index-2,nums)+nums[index];
+        return Math.max(candidate1,candidate2);
+    }
+}
+```
+
+## [213. 打家劫舍 II](https://leetcode-cn.com/problems/house-robber-ii/)(fail)
+
+这个题的想法是如果最后一家没有打劫到那么就直接使用打劫前i-1家的钱，否则就找到加入最后一家的方案的源头（这个过程还是没有看到len =2 的特殊情况考虑清楚）看它是不是1,如果是的话就使用dp【i-1】否则使用dp[i]，（也就是假设最大值就是在这两个值之间找）。
+
+```java
+class Solution {
+    public int rob(int[] nums) {
+        
+        int  len =nums.length+1;
+        if(len==1)return 0;
+        int[] dp =new int[len];
+        dp[1]=nums[0];
+        if(nums.length>=2){
+            dp[2]=Math.max(nums[1],nums[0]);
+        }
+        if(nums.length==3){
+            return Math.max(Math.max(nums[1],nums[0]),nums[2]);
+        }
+        for(int i=3;i<len;i++){
+            dp[i]=Math.max(dp[i-1],dp[i-2]+nums[i-1]);
+        }
+        if(len==2)return dp[1];
+        if(dp[len-2]==dp[len-1]){
+            System.out.println("fd"+dp[len-1]);
+            System.out.println(len-1);
+            return dp[len-2];
+        }else{
+            System.out.println("fd"+dp[len-2]);
+            System.out.println("fds"+dp[len-1]);
+            int origin=getOrigin(nums,dp,len-1);
+         System.out.println("origin"+origin);
+            return origin==1?dp[len-2]:dp[len-1];
+        }
+    }
+    
+    private int getOrigin(int[]nums,int [] dp,int len){
+       // System.out.println("note len"+len);
+         if(len==2){
+            return nums[1]>=nums[0]?2:1;
+        }
+        if(len==1){
+            return 1;
+        }
+        if(dp[len-1]==dp[len-2]+nums[len-1]){
+            int candidate1= getOrigin(nums,dp,len-1);
+            int candidate2= getOrigin(nums,dp,len-2);
+            if(candidate1!=1)return candidate1;
+            return candidate2;
+        }
+        if(dp[len]==dp[len-1]){
+            return getOrigin(nums,dp,len-1);
+        }else{
+            return getOrigin(nums,dp,len-2);
+        }
+    }
+```
+
+两种范围的递归
+
+```java
+class Solution {
+    public int rob(int[] nums) {
+        if(nums.length==0)return 0;
+        if(nums.length==1)return nums[0];
+        if(nums.length==2)return Math.max(nums[1],nums[0]);
+        return Math.max(help(nums,1,nums.length-1),help(nums,0,nums.length-2));
+        
+    
+    }
+    private int help(int[] nums,int start, int  end){
+        int len = end-start+1;
+        System.out.println(len);
+        int[] dp=new int [len+1];
+        dp[1] = nums[start];
+        for(int i=start+1;i<=end;i++){
+            dp[i-start+1]=Math.max(dp[i-start],dp[i-start-1]+nums[i]);
+        }
+        System.out.println(dp[len]);
+        return  dp[len];
+    }
+    
+    
+}
 ```
 
 
