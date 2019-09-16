@@ -191,29 +191,201 @@ hashCode()与equals()必须要协调。如果equals返回true，那么hashCode()
 
 ### 树集
 
+树集是有序的，调用sort方法会将元素按顺序全部打印出来。（如何按顺序遍历一个红黑树）
+
+使用树集的元素必须实现comparable接口，或者是提供一个comparator。TreeSet 实现了NavigableSet接口。（增加了定位元素，以及反响遍历的方法）。
+
+
+
+```java
+TreeSet set =new TreeSet ();
+NavigableSet set = new TreeSet<>(Comparator.comparing(Item::getDescriiption)); 
+
+```
+
+
+
 ### 队列与双端队列
+
+Queue接口 队列接口
+
+Deque 接口（ArrayDeque & LinkedDeque都实习了双端队列）
+
+Deque 接口实现了Queue 接口。
 
 ### 优先级队列
 
+堆 
+
+PriportyQueue  
+
+默认是一个小顶堆。
+
 ## 映射
 
+api
+
+```java
+putAll(Map<? extends K, ? extends V > entries);
+```
+
+将给定的映射中的所有条目都加入到这个集合中。
+
 ### 基本映射操作
+
+```java
+特例说明：
+
+       TreeMap、TreeSet两个类在加入第二个元素时，会调用Comparator比较器比较先后加入的元素是否重复（TreeMap比较的是Key值）。所以当加入第一个元素时，即使第一个元素是null，也不会报错，因为此时不会调用比较器，再次加入元素则报错。
+
+      已测试的其他集合类HashSet / HashMap / ArrayList / LinkedList均可接受null值。
+
+```
+
+
 
 ### 更新映射操作
 
 ### 映射视图
 
+有三种视图
+
+1. 键
+2. 值
+3. 键/值 对
+
+KeySet 不是HashSet 或TreeSet 而是实现了Set接口的另外某个类的对象。
+
+values() 方法获得所有值的集合（返回的是Collection类型，从这个集合中删除的元素，删除的值和相应的键将从映射中删除，不过不能够添加元素）
+
+values 方法返回的是一个Collection对象那么为什么它不能够add(所有的collection都应该实现的)
+
+```java
+
+//在实现add()方法时直接抛出一个异常。
+    public boolean add(E var1) {
+        throw new UnsupportedOperationException();
+    }
+```
+
+键值对的视图
+
+```java
+for(Map.Entry<String,Employee> entry : staff.entrySet()){
+    String k =entry.getKey();
+    Employee v = entry.getValue();
+    ....
+}
+//如果这里使用了泛型的话那么就不需要进行强转了，这里的参数类型已经被编译器所推测出来。
+hashMap.forEach(K,v)->{
+    
+}
+//hashMap 的forEach()继承自map接口的 foreach() 
+```
+
+这三个视图都只能进行删除操作但是不能 够进行添加操作尽管键值对的添加看起来象是有意义的。
+
+
+
 ### 弱散列映射
+
+问题的背景一个键值对已经不再使用（不再任何途径引用这个对象）。
+
+但是由于在没有在程序中应用这个键所以再也不能够删除这个键值对，这看起来时Java垃圾回收器的工作但是由于储存它的桶还是活动的，所以垃圾 回收器不能够回收这个键值对（垃圾回收器会跟踪活动的对象）。
+
+WeakHashMap 使用弱引用保存键。（如果垃圾回收器发现只有弱引用应用某个对象那么这个垃圾回收器就会回收这个对象）
+
+WeakHashMap会周期性的检查队列来看有没有新的对象加入到WeakHashMap中来，以便删除它。
+
+
+
+
+
+
 
 ### 链接散列与映射
 
+LinkedHashMap 
+
+```java
+class LRUCache extends LinkedHashMap<Integer, Integer>{
+    private int capacity;
+    
+    public LRUCache(int capacity) {
+        super(capacity, 0.75F, true);
+        this.capacity = capacity;
+    }
+
+    public int get(int key) {
+        return super.getOrDefault(key, -1);
+    }
+
+    public void put(int key, int value) {
+        super.put(key, value);
+    }
+
+    @Override
+    protected boolean removeEldestEntry(Map.Entry<Integer, Integer> eldest) {
+        return size() > capacity; 
+    }
+}
+
+```
+
+关于对于hashSet的遍历它由于不同的jdk版本实习不同所以不能够预测出来它的实际遍历顺序（也就是看起来是无序无规律的）。
+
 ### 枚举集与映射
+
+EnumSet是一个枚举元素集的高效实现。EnumSet内部用位序列实现，如果对应的值在集中那么就会让相应的位置为一。
+
+```java
+//注意参数类型
+E extends Enum<E>
+//指明E是一个枚举类型，所有的枚举类型都扩展于泛型类Enum类。
+//这也就是说这个这个参数只能是某个Enum类型因为Enum类没有共有的构造方法（它不能够被继承）。
+```
+
+
+
+关于Enum
+
+```java
+//Modifier 'static' is redundant for inner enums 
+public static enum WeekDay{Monday,Tuesday};
+```
+
+'EnumSet' is abstract; cannot be instantiated 	
+
+```java
+ EnumSet<WeekDay> always= EnumSet.noneOf(WeekDay.class);//返回一个空的集合
+        EnumSet<WeekDay> never= EnumSet.allOf(WeekDay.class);//返回一个具有所有元素的集合
+        EnumSet<WeekDay> sometimes= EnumSet.of(WeekDay.Monday,WeekDay.Tuesday);//返回一个含有指定元素的enumset
+        EnumSet<WeekDay> often= EnumSet.range(WeekDay.Monday,WeekDay.Tuesday);//返回一个含有指定区间所有元素的集合，这个顺序是默认按照元素在enum 在元素中的放置位置
+```
+
+可以使用数组来完成这个EnumSet
 
 ### 标识散列映射
 
+IdentityHashMap 
+
+在这个类中键的散列值不是用hash函数计算的。而是用System.identitiyHashCode() 计算的。根据内存地址来计算散列码的方法。当对两个对象进行比较时会使用==，而不是equals 方法。可以用来跟踪每个类的遍历情况（只看地址不看内容，内容相同的也会存进去如果地址不相同）
+
 ## 视图与包装器
 
+例如keyset方法它返回了一个实现了set接口的类对象，这个类的方法可以对原映射进行操作。像这样的集合就叫做视图。
+
+
+
+
+
 ### 轻量级集合包装器
+
+Arrays.asList方法返回了一个包装了普通Java数组的list包装器。这个方法可以将数组传递给一个期望得到列表的方法。
+
+返回的对象不是ArrayList .是一个视图对象。（带有访问底层数组的get和size方法但是改变数组大小的方法都会抛出不支持异常）
+
+
 
 ### 子范围
 
