@@ -172,7 +172,35 @@ class Solution {
 }
 ```
 
+## [90. 子集 II](https://leetcode-cn.com/problems/subsets-ii/)
 
+复习
+
+```java
+class Solution {
+    public List<List<Integer>> subsetsWithDup(int[] nums) {
+        Arrays.sort(nums);
+        List<List<Integer>> res =new ArrayList<>();
+        List<Integer> list= new ArrayList<>();
+        res.add(Collections.emptyList());
+        helper(nums,0,res,list);
+      
+        return res;
+    }
+    private  void helper(int[] nums,int index, List<List<Integer>> res, List<Integer> list ){
+        for(int i=index;i<nums.length;){
+            list.add(nums[i]);
+            List<Integer>copy =new ArrayList<>(list);
+            res.add(copy);
+            helper(nums,i+1,res,list);
+            list.remove(list.size()-1);
+            while(++i<nums.length&&nums[i]==nums[i-1]);
+        }
+    }
+}
+```
+
+#### 
 
 
 

@@ -719,3 +719,65 @@ class Solution {
 
 
 
+## [357. 计算各个位数不同的数字个数](https://leetcode-cn.com/problems/count-numbers-with-unique-digits/)
+
+一开始以为直接求所有不相同的数字会比较困难但是没有想到求相同的数字更加困难思路变成了下面这样。
+
+```java
+class Solution {
+    public int countNumbersWithUniqueDigits(int n) {
+        int []dp =new int[n+1];
+        dp[0]=0;
+        dp[1]=0;
+        dp[2]=9;
+        dp[3]=9;
+        int part1=power(9,(n-2))-dp[n-2]*9   //1.先填充两边（两边都相同）里面的是位 的不等于的数
+        int part2=dp[n-1]*9     //2. 填充所有n-1的所有能符合的数字。
+        int part3=power(9,n-1)*(n-2);  // 3. 填充单边的数字
+        dp[n]=part1+part2+part3;
+        return power(9,n)-dp[n];
+    }
+        123115
+        512311
+        123415
+        112235
+        511223
+        512341
+        512345
+        123115
+        123455
+            12343
+            31234
+            12343
+            12341
+            
+            
+            16*15*14
+            
+        
+        
+}
+```
+
+正确的解
+
+```java
+class Solution {
+    public int countNumbersWithUniqueDigits(int n) {
+        if(n==0)return 1;
+        if(n==1)return 10;
+        int temp=10;
+        int pre=9;
+        int res=0;
+        for(int i=2;i<=n;i++){
+            pre=pre*(10-i+1);
+            res=temp+pre; 
+            temp=res;
+        }
+        
+        return res;
+    }
+        
+}
+```
+
