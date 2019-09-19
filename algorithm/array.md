@@ -116,3 +116,118 @@ class Solution {
 
 ```
 
+## [713. 乘积小于K的子数组](https://leetcode-cn.com/problems/subarray-product-less-than-k/)
+
+```java
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        //1,2,34,53,,6,2,6,34,5
+        int preMin=1;
+        int count=0;
+        int ll=0;
+        int len=nums.length;
+        for(int i=0;i<len;i++){
+            if(nums[i]>=k){
+                ll=0;
+                preMin=1;
+            }else{
+                if(preMin*nums[i]<k){
+                    ll=ll+1;
+                    preMin=preMin*nums[i];
+                }else{
+                    preMin=nums[i];
+                    ll=1;
+                    for(int j=i-1;j>=0;j--){
+                        if(preMin*nums[j]<k){
+                            ll++;
+                            preMin*=nums[j];
+                        }else{
+                            break;
+                        }
+                    }
+                }
+            }
+            count+=ll;
+          
+        }
+        return count;
+        
+    }
+}
+```
+
+## [817. 链表组件](https://leetcode-cn.com/problems/linked-list-components/)
+
+```java
+class Solution {
+    public int numComponents(ListNode head, int[] G) {
+        int len =0;
+        int res=0;
+        Set<Integer> set =new  HashSet<Integer> ();
+        for(int e:G){
+            set.add(e);
+        }
+        for(ListNode n=head;n!=null;n=n.next){
+            if(set.contains(n.val)){
+                if(len==0)res++;
+                len++;
+            }else{
+                len=0;
+            }
+        }
+        return res;
+            
+    }
+}
+```
+
+## [238. 除自身以外数组的乘积](https://leetcode-cn.com/problems/product-of-array-except-self/)
+
+```java
+
+class Solution {
+    public int[] productExceptSelf(int[] nums) {
+        int right=1;
+        int left=1;
+        int len= nums.length;
+        int[]res=new int[len];
+        for(int i=0;i<len;i++){
+            res[i]=1;
+        }
+        for(int i=0;i<len;i++){
+            res[i]*=left;
+            res[len-i-1]*=right;
+            left=nums[i]*left;
+            right=nums[len-i-1]*right;
+        }
+        return res;
+    }
+}
+```
+
+## [152. 乘积最大子序列](https://leetcode-cn.com/problems/maximum-product-subarray/)
+
+进阶版最大子序和
+
+```java
+class Solution {
+    public int maxProduct(int[] nums) {
+        int max =Integer.MIN_VALUE;
+        int minI=1;
+        int maxI=1;
+        for(int i=0;i<nums.length;i++){
+            if(nums[i]<0){
+                int tmp=minI;
+                minI=maxI;
+                maxI=tmp;
+            }
+            minI=nums[i]*minI<nums[i]?nums[i]*minI:nums[i];
+            maxI=nums[i]*maxI>nums[i]?nums[i]*maxI:nums[i];
+            max=max>maxI?max:maxI;//这一句还是不能省掉（2，3，-2，4）
+        }
+        return max;
+    }
+}
+
+```
+

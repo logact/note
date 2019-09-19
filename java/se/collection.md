@@ -285,6 +285,26 @@ hashMap.forEach(K,v)->{
 
 这三个视图都只能进行删除操作但是不能 够进行添加操作尽管键值对的添加看起来象是有意义的。
 
+```java
+//hashmap的compute，putIfAbsent ,merge
+ public static void main(String[] args) {
+        Map<String, Integer> map = new HashMap<>();
+        map.putIfAbsent("hello",3);//如果不存在这个键就将这个值（3）直接放进去返回这个键对应的值。
+        System.out.println(map.get("hello"));
+        map.compute("hello",(k,v)->{
+           return v+4;
+        });
+        map.compute("wer",(k,v)->v==null?29:v+1);
+        System.out.println(map.get("hello"));
+        System.out.println(map.get("wer"));
+        map.merge("hello",2, Integer::sum);//这个方法不处理键，如果这个值不存在就会被设为已知的值，否则就将现有的值与原始值相加。
+
+
+    }
+```
+
+
+
 
 
 ### 弱散列映射
