@@ -203,6 +203,12 @@ NavigableSet set = new TreeSet<>(Comparator.comparing(Item::getDescriiption));
 
 ```
 
+### Collections
+
+```java
+Collections.singleton(...);//用于产生一些只有固定单个元素的集合。
+```
+
 
 
 ### 队列与双端队列
