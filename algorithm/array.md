@@ -6,6 +6,8 @@
 
 这个题目不能主要是注意标准题目的写法更优
 
+easy?
+
 ```java
 	class Solution {
     public boolean containsNearbyDuplicate(int[] nums, int k) {
@@ -47,6 +49,8 @@ public boolean containsNearbyDuplicate(int[] nums, int k) {
 
 1.method 固定斐波那契数列让它的每个值从数组滑落（但是这并不一定是斐波那契数列）
 
+2.使用dp
+
 ```java
 class Solution {
     public int lenLongestFibSubseq(int[] A) {
@@ -57,7 +61,7 @@ class Solution {
         int res=0;
         int[] f= getF(base);//获得一个最大值为base的斐波那契递增数列
         int j=A.length;
-        for(int i=f.length-1;i>=0;i--){
+        for(int i=f.length-1;i>=0;i--){//这种滑落没有是不用这种二层循环的。
             int  v=f[i];
             temp=0;
             for(;j>=0&&v<=A[j];j--){//如果这个斐波那契数列的这个值比当前的数组下标的值要大那么就断掉了记下它的长度。
@@ -81,6 +85,8 @@ class Solution {
 ```
 
 2.实际上直接使用暴力的方法就能够做出这个题来（不要以为的去套动态规划，回溯这些技巧）应该先看清这能不能使用这些技巧，这个题目看起来好像能用动态规划做但是却并不刻意（动态规划的问题大的问题与小的问题是无关的）但是在这道题中，第i个数到第j个数之间的序列长度好像并没有与它相邻扩展的问题有关联，所以不能使用动态规划。可以直接使用这个遍历的方法。（直接看问题得到思路）技巧就是使用了一个hashmap。
+
+（中等）
 
 正确的解
 
@@ -107,6 +113,7 @@ class Solution {
                 res =Math.max(res,temp);
             }
         }
+        
         return res>=3?res:0;
         
             
@@ -156,6 +163,96 @@ class Solution {
 }
 ```
 
+```java
+//1,2,34,53,,6,
+        int pre = 1;
+        int len =0;
+        int res=0;
+        for(int i=0;i<nums.length;i++){
+            len++;
+            pre=pre*nums[i];
+            if(pre>=k){
+                pre=1;
+                int limit =i-len;
+                int j=i;
+                len=0;
+                while(j>limit&&pre*nums[j]<k){
+                    pre=pre*nums[j];//试探步。
+                    j--;
+                    len++;
+                }
+                res+=len;
+            }else{
+                res+=len;
+            }
+            
+        }
+        return res;
+```
+
+```java
+class Solution {
+    public int numSubarrayProductLessThanK(int[] nums, int k) {
+        //滑动窗口
+        if(k<=1)return 0;
+        int left=0;
+        int right=left;
+        int pre=1;
+        int res=0;
+        while(right<nums.length){
+            pre*=nums[right];
+            while(pre>=k){
+                pre =pre/nums[left];
+                left++;
+            }
+            
+            res=res+right-left+1;
+            right++;
+        }
+        return res;
+        
+    }
+}
+```
+
+
+
+将一个元组（tuple)映射成一个值。
+
+```java
+class Solution {
+    public int lenLongestFibSubseq(int[] A) {
+        int lenA=A.length;
+        Map<Integer,Integer> map1 =new HashMap<>();
+        for(int i=0;i<lenA;i++){
+            map1.put(A[i],i);
+        }
+        Map<Integer,Integer> map2=new HashMap<>();
+        
+        int res=0;
+        for(int i=2;i<lenA;i++){
+            for(int j=0;j<i;j++){
+                int v = map1.getOrDefault(A[i]-A[j],-1);
+                if(v>=0&&v<j){
+                    int cand= map2.getOrDefault(v*lenA+j,2)+1;//将两个值映射成一个值
+                    res=res>cand?res:cand;
+                    map2.put(j*lenA+i,cand);
+                }
+            }
+        }
+        
+        return res>2?res:0;
+            
+    }
+}
+```
+
+
+
+
+
+## 
+
 ## [817. 链表组件](https://leetcode-cn.com/problems/linked-list-components/)
 
 ```java
@@ -183,6 +280,10 @@ class Solution {
 
 ## [238. 除自身以外数组的乘积](https://leetcode-cn.com/problems/product-of-array-except-self/)
 
+这个最自然的想法就是用两个数组，将每个数值的左右乘积存储起来然后再遍历一遍将值写出。
+
+但是更好的方法是，不执著于每次算一个乘积时一定要左右同时计算。
+
 ```java
 
 class Solution {
@@ -206,6 +307,8 @@ class Solution {
 ```
 
 ## [152. 乘积最大子序列](https://leetcode-cn.com/problems/maximum-product-subarray/)
+
+
 
 进阶版最大子序和
 
