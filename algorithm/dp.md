@@ -4,6 +4,8 @@
 
 简单的动态规划，很容易想到递归关系
 
+第二次做使用了回溯算法超时了。
+
 假如词典中的的单词不允许重复呢？
 
 ```java
@@ -18,7 +20,7 @@ class Solution {
                 if(i>=word.length()&&word.equals(s.substring(i-word.length(),i))){
                     dp[i]=dp[i-word.length()];
                 }
-                if(dp[i]){
+                if(dp[i])th{
                     break;
                 }
             }
@@ -29,6 +31,8 @@ class Solution {
 }
 ```
 
+
+
 ## [140. 单词拆分 II](https://leetcode-cn.com/problems/word-break-ii/)（待做）
 
 ## [416. 分割等和子集](https://leetcode-cn.com/problems/partition-equal-subset-sum/)（fail | more）
@@ -38,6 +42,8 @@ class Solution {
 这是关键点：
 
  [***`初始时应该就是这一种的合法情况。在装入一件物品的时候只有刚好与它体积相等的情况才是合法的。这是关键的一点`***]( //初始时应该就是这一种的合法情况。在装入一件物品的时候只有刚好与它体积相等的情况才是合法的。这是关键的一点)
+
+这里用回溯的话就会超时。。。，。。！！！！！！！！！！！！！！
 
 ```java
 class Solution {
@@ -108,7 +114,7 @@ class Solution {
 
 ## [494. 目标和](https://leetcode-cn.com/problems/target-sum/)
 
-第一眼看过去就像是回溯算法(很容易做).确实可以用回溯算法做
+第一眼看过去就像是回溯算法(很容易做).确实可以用回溯算法做easy
 
 方法二使用呢动态规划做（先将问题转换为子数组组合问题需要一步数学推理）。同样这个问题就是一个零一背包问题的变种（它对应于体积恰好相等的情况）注意初始化的情况。
 
@@ -165,11 +171,11 @@ class Solution {
 
 ## [474. 一和零](https://leetcode-cn.com/problems/ones-and-zeroes/)（待做）
 
-1.解法一:用全排列将所有的组合（m个0，n个1组成）但是这样有问题，本来的方案是将这个数组选的时候化为三种状态选零选一，不选。但是这样情况有重叠。	这样转换为了另一种全排列。（长度不相同的全排列）（这比较复杂还要考虑几个一几个零的多种情况在同一个长度内）（暂时做不出来用这种方法找不到所有长度的全部组合）
+1.解法一:用全排列将所有的组合（m个0，n个1组成）但是这样有问题，本来的方案是将这个数组选的时候化为三种状态选零选一，不选。但是这样情况有重叠。	这样转换为了另一种全排列。（长度不相同的全排列）（这比较复杂还要考虑几个一几个零的多种情况在同一个长度内）（暂时做不出来用这种方法找不到所有长度的全部组合）如果用全排列将所有的子集拿出来时间复杂度太高（不仅要将所有的子集都算出来这里花费的时间是2的n次方，还要将所有得到的结果做一次全排列这个时候就会出现重复，还要去重（方案不通。。。。。））
 
 2.有点像多重背包
 
-3.这是一道多重背包的问题（物体是字符串）而01的数量看成是两个维度的限制。
+3.这是一道多重背包的问题（物体是字而01的数量看成是两个维度的限制。
 
 4.这个题的初始化动态规划的初始状态可以从第一个参与计算的数值进行推算如本题会直接利用到dp00 的情况是dpij =max(dpij,dp i-czero j-cone)这个如果让初始值dp00 为一那么这个值就会等于二明显不符和题意。
 
@@ -194,7 +200,7 @@ class Solution {
                 for(int j=n;j>=countOne;j--){
                   dp[i][j]=Math.max(dp[i][j],dp[i-countZero][j-countOne]+1);
                 }
-            }
+            }//如果不采用降序，那么就要使用三维数组。
         }
         return dp[m][n];
     }
@@ -204,6 +210,8 @@ class Solution {
 ```
 
 ## [1049. 最后一块石头的重量 II](https://leetcode-cn.com/problems/last-stone-weight-ii/)（more）
+
+第二次做：没有想到转换成零一背包的过程。
 
 ​	Method 1：每次让数组中两个最大的值相减。	一直这样减到只有数组中只有一个数或者没有数字（但是这样好像不能够覆盖所有情况）
 
@@ -215,7 +223,7 @@ class Solution {
 
 method 2:零一背包需要做一点转换，如前面的一道题一样，将其分成两个部分。
 
-method 3:
+method 3: 
 
 ```java
 class Solution {
@@ -250,7 +258,9 @@ class Solution {
 
 
 
-## [132. 分割回文串 II](https://leetcode-cn.com/problems/palindrome-partitioning-ii/)
+## [132. 分割回文串 II](https://leetcode-cn.com/problems/palindrome-partitioning-ii/)（difficult fail）
+
+
 
 ## [518. 零钱兑换 II](https://leetcode-cn.com/problems/coin-change-2/)
 
