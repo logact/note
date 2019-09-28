@@ -6,14 +6,16 @@
 
 1. ip地址大小 0~255
 2. 最后一个（IP 字段后面没有加 '   .  ' ）去最后一段的特殊情况没有在回溯的过程中而是在结束的时候。应该从最后一个没有加 '  .  '就可以看出来这个字段有一定的特殊性应该在后面处理和递归过程中选择处理。
-
-
+3. 这个题在做第二遍的时候没有想到用数组而是使用了StringBuilder。所以速度变慢了很多。
+4. 还有就是StringBuilder还有要给delete(i,j)的方法。
 
 ## [131. Palindrome Partitioning](https://leetcode-cn.com/problems/palindrome-partitioning/)
 
 笔误
 
 用动态递归的方法判断字符字串是否是回文串。
+
+第二遍做这个题 的结果是没有掌握好判定回文字符串的dp写法导致各种问题。一定要注意判定回文字符串时的dp操作，这个很容易出错，注意两个下标的增长方向，不要搞反。
 
 ```java
 class Solution {
@@ -104,6 +106,8 @@ class Solution {
 
 2.先确定前面两个数。
 
+3.第二次做的错误这里不要直接把将i++; 代入到循环中没有符合条件都会加上这个值，没有用long的方式做出来。
+
 ```java
 class Solution {
     public boolean isAdditiveNumber(String num) {
@@ -171,6 +175,68 @@ class Solution {
     }
 }
 ```
+
+```java
+//第二次做的错误。。。。。。。
+class Solution {
+    int lenN;
+    String num;
+    public boolean isAdditiveNumber(String num) {
+       //16:44
+        lenN=num.length();
+        this.num =num;
+        for(int i=0;i<=32&&i<lenN/2;i++){
+            String pre1=num.substring(0,i+1);
+            for(int j=i+1;j-i<=32&&j<lenN-1;j++){//还有点细节为了速度暂时不考虑
+                if(num.charAt(i+1)=='0'&&j!=i+1)break;
+                String pre2=num.substring(i+1,j+1);
+                if(helper(pre1,pre2,j+1))return true;
+            }
+        }
+        return false;
+    }
+    private boolean helper(String pre1,String pre2,int index){
+        if(index==lenN)return true;
+        String sum =sum(pre1,pre2);
+        int i=0;
+        while(index<lenN&&i<sum.length()&&sum.charAt(i)==num.charAt(index)){//这里不要直接把将i++; 代入到循环中没有符合条件都会加上这个值
+            i++;
+            index++;
+        };
+        if(i!=sum.length())return false;
+        return helper(pre2,sum,index);
+    }
+    private String sum(String s1,String s2){
+        int p1=s1.length()-1;
+        int p2=s2.length()-1;
+        int pop=0;
+        StringBuilder res =new StringBuilder();
+        while(p1>=0||p2>=0||pop!=0){
+            System.out.println(pop);
+            int sum=0;
+            if(p1>=0){
+                sum+=s1.charAt(p1)-'0';
+                p1--;
+            }
+            if(p2>=0){
+                sum+=s2.charAt(p2)-'0';
+                p2--;
+            }
+            if(pop>0){
+                sum+=pop;
+            }
+            res.insert(0,sum%10);
+            pop =sum/10;
+        }
+        System.out.println("s1:"+s1+"s2:"+s2+"res:"+res);
+        return res.toString();
+    }
+    
+}
+
+```
+
+
 
 ## [90. 子集 II](https://leetcode-cn.com/problems/subsets-ii/)
 

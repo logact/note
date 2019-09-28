@@ -7,7 +7,7 @@
 注意浮点数这种特殊的情况：
 
 ```java
-  for(double i=0;i !=10;i+=0.1){
+  for(double i=0; i!=10;i+=0.1){
             System.out.println("i:----->>>>>> " + i);
         }
 ```

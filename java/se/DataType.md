@@ -187,13 +187,19 @@ Unicode编码是在基本的 ASCII码上的一个改进，可以同时兼容两�
 2. 拼接：一个字符串与一个非字符串进行拼接操作时就会转变为字符串。Java中任何对象都能够转换为字符串。
 3. join()方法：
 
+
+
+### 字符串不可变：
+
+字符串不可是java虚拟机提供的，使用反射机制可以改变字符串的值。
+
 java字符串不可变的优缺点？
 
 1.每次拼接都会产生新的对象。
 
 2.但是不可变字符串可以使得编译器让字符串共享。
 
-3.各种字符串存放在公共的存储池中。字符串变量只想存储池中的相应的位置。
+3.各种字符串存放在公共的存储池中。字符串变量只需要存储池中的相应的位置。
 
 如果复制一个字符串那么就会让原始字符串与复制后的字符串共享一个字符串。
 
@@ -207,7 +213,32 @@ java 会进行自动的进行垃圾回收。如果有哪一块的内存不用了
 布尔值与字符串连接后可以当作布尔值来使用只不过他的值一直是false")
 ```
 
+### 将字符串分解为词：
 
+三种方式:(recommend the reg exp)
+
+```java
+        String s= "1 2 3 4 5 6 a d  gg dfg dfaf";
+        //spilt the String by one whitespace
+        for (String word: s.split(" ")) {
+            System.out.println(word);
+        }
+        // use  reg exp  to spilt the String by one or more whitespace
+        // 返回的是一个字符串数组。
+        for (String word : s.split("\\s+")) {
+            System.out.println(word);
+        }
+        //use the StringTokenizer
+        //默认的会将连续的分割符都删去
+        StringTokenizer st = new StringTokenizer("hello world, of    |java",",l |");
+        while (st.hasMoreElements()) {
+            System.out.println("Token: " + st.nextToken());
+        }
+```
+
+### 让字符串对齐
+
+1. 
 
 ### 码点与代码单元：
 
@@ -217,7 +248,7 @@ string.charAt()函数是以代码单元为处理单位而不是以码点作为�
 
 可以使用以下代码实现依次查看每一个码点：
 
-### StirngBuilder and StirngBuffer
+### StringBuilder and StringBuffer
 
 1.区别：
 
