@@ -16,8 +16,7 @@ class Solution {
         boolean [] dp=new boolean[s.length()+1];
         dp[0]=true;
         for(int i=1;i<=s.length();i++){
-            for(String word : wordDict){
-                if(i>=word.length()&&word.equals(s.substring(i-word.length(),i))){
+            for(String word : wordDict){               if(i>=word.length()&&word.equals(s.substring(i-word.length(),i))){
                     dp[i]=dp[i-word.length()];
                 }
                 if(dp[i])th{
@@ -184,7 +183,7 @@ class Solution {
     public int findMaxForm(String[] strs, int m, int n) {
         if(strs.length==0)return 0;
         int dp[][] =new int [m+1][n+1];
-    //    dp[0][0]=1;
+    //  dp[0][0]=1;
         for(String str:strs){
             int countZero=0;
             int countOne=0;
@@ -268,6 +267,8 @@ class Solution {
 
 那这样看待的话这个就是一个完全背包问题。出错的地方是递推方程写错了。初始值应该设为一，如果没有目标金额可选的货币为空时这个方案数字应为1.
 
+第二次做的时候递归方程又写错了，所以这个题的递归方程是很容易出错的地方，值得注意。
+
 ```java
 class Solution {
     public int change(int amount, int[] coins) {
@@ -314,6 +315,8 @@ class Solution {
 3. 每个元素如果每次递归过程都可以被选那么就会出现重复的情况。
 
 使用动态规划。
+
+第二次做使用了回溯算法，success。还是没有用动态规划做出来，这个题目就涉及到了背包问题（动态规划问题）求具体的方案的问题集合。
 
 ```java
 class Solution {
@@ -450,13 +453,19 @@ class Solution {
 
 ```
 
-这里可以看出动态规划与回溯之间是一对一的关系，回溯是自顶向下的而动态规划自下向上的。
+这里可以看出动态规划与回溯之间是一对一的关系，回溯是自顶向下的而动态规划自底向上的。
 
-## [322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)（fail)
+## [322. 零钱兑换](https://leetcode-cn.com/problems/coin-change/)（fail！！！！！！！！)
 
 这个题不能理解为一个完全背包问题。
 
 用上回溯方法优化中的问题。（先写出递推方程）
+
+第二次做使用了回溯算法超时了。失败了使用动态规划，或者在回溯过程中加入缓存储存中间结果。两种方案。
+
+两种不同的递归写法就会造成两种不同的思路，这就直接决定了接下来的那些关于递归的优化。（这里适用于递归的优化方案就是使用带返回值的回溯方式，然后让这个，将问题变为子问题（与访问数组的起始位置无关）因为这个题有重复解并不影响这个问题的求解区别于排列问题。可以经过观察得出这个问题的解只与这个问题的规模有关（包括于它的子问题））。
+
+然后进一步的方案就是使用动态规划了。
 
 ```java
 class Solution {
@@ -465,13 +474,14 @@ class Solution {
         for(int i=1;i<dp.length;i++){
             dp[i]=1;
         }
+       
         
         for(int v:coins){
             for(int i=v;i<=amout;i++){
                 dp[i]=Math.min(dp[i],dp[i-v]+1);
             }
         }
-        return dp[amout];
+        return dp[amount];
         
     }
 }		
