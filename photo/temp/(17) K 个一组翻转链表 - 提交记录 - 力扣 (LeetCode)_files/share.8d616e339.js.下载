@@ -1,5 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[43],{"1Lhr":
-/*!*************************************************!*\
-  !*** ./static_files/apps/share/share.entry.jsx ***!
-  \*************************************************/
-/*! no exports provided */function(e,n,t){"use strict";t.r(n);t(/*! libraries/components/lc */"k4Gj");var r=t(/*! react */"Ae8x"),a=t.n(r),o=t(/*! react-dom */"ESdS"),c=t(/*! libraries/components */"f0d8");Object(o.render)(a.a.createElement(c.NojIntlProvider,null,a.a.createElement(c.ShareButton,null)),document.getElementById("share-app"))}},[["1Lhr",0,2,1,3]]]);
