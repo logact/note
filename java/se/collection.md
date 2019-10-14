@@ -2,8 +2,6 @@
 
 java集合的操作
 
-
-
 ## Java集合框架
 
 ### 将集合接口与实现分离
@@ -18,6 +16,7 @@ Collection 接口有两个基本方法。
 public interface Collection<E>{
     boolean add(E elemnet);//集合中不允许有重复的元素如果插入重复的元素就会返回false
     Iterator<E> iterator();//返回一个实现了iterator接口的对象。
+ 
     ...//还有方法在之后介绍。
 }
 ```
