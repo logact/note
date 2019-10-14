@@ -79,3 +79,52 @@ also can do it with a heap.
 odd  and even 
 
 奇偶之间的转换关系
+
+
+
+## 1221. Split a String in Balanced Strings（5 min）
+
+## 944. Delete Columns to Make Sorted(10 min)
+
+## 763. Partition Labels(20min)（more elegant solution）
+
+第一时间没有想清直接利用map来做。
+
+## 921. Minimum Add to Make Parentheses Valid（20min）（more elegant solution）
+
+第一次做错了，直接用左右括号数量的差值当作结果返回。这是错误的
+
+左右括号问题
+
+1. 用stack解决
+
+2. 记录两个括号的数量的方式解决
+
+   ```java
+   class Solution {
+       public int minAddToMakeValid(String S) {
+           int leftExtra = 0, rightExtra = 0;
+           for (int i = 0; i < S.length(); i++) {
+               if (S.charAt(i) == '(') {
+                   leftExtra ++;
+               } else if (S.charAt(i) == ')') {
+                  if (leftExtra > 0) {
+                      leftExtra --;
+                   
+               } else {
+                   rightExtra ++;
+               }
+           }
+           }
+           return leftExtra + rightExtra;
+       }
+   }
+   ```
+
+   
+
+
+
+## 861. Score After Flipping Matrix(fail)(40min)（more elegant solution）（未完待续）
+
+位运算
