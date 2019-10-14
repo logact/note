@@ -171,3 +171,20 @@ look at controlling fruit  flies with parasitic  wasps.
 rampage
 
 lethal traps baited with   
+
+no  feat went most of the action is taking place in dense,leafy canopies, ten meters off the ground.
+
+most farmers harvest their fruit early,when it is not yet fully ripe.
+
+farmers  whose trees are  teeming with  weaver  ants ,do not need to bother with any of this.
+
+batch  
+
+pupa
+
+All you need to do is to locate a suitable nest and run string to the tree which you hope to protected.
+
+so are able to market their  mangoes as organic to eager European consumers. vastly increasing their income,the ants as to speak,are on the march.
+
+
+
