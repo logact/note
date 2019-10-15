@@ -128,3 +128,117 @@ odd  and even
 ## 861. Score After Flipping Matrix(fail)(40min)（more elegant solution）（未完待续）
 
 位运算
+
+## 406. Queue Reconstruction by Height（fail）(more)
+
+
+
+## 1111. Maximum Nesting Depth of Two Valid Parentheses Strings(fail)
+
+这种括号的题目右括号不重要
+
+
+
+
+
+## 1090. Largest Values From Labels(more)(没看懂题)
+
+1. 使用优先队列
+
+
+
+## 1094. car pool
+
+1. 使用hashmap
+2. 使用优先队列
+
+```java
+//hashMap 的遍历删除出错与这个遍历器有关。 
+for(int i:map.keySet()){
+                if(i<=trip[1]){
+                    sum-=map.get(i);
+                    map.remove(i);
+                }
+            }
+```
+
+```java
+class Solution {
+    public boolean carPooling(int[][] trips, int capacity) {
+        // 8:10
+        Arrays.sort(trips,(t1,t2)->{
+            return  t1[1]-t2[1];
+        });
+        int sum=0;
+        Map<Integer,Integer> map =new HashMap<>();
+        for(int[]trip:trips){
+            
+            map.put(trip[2],trip[0]+map.getOrDefault(trip[2],0));
+            Iterator<Map.Entry<Integer,Integer>> iterator=map.entrySet().iterator();
+            while(iterator.hasNext()){
+                Map.Entry<Integer,Integer> item=iterator.next();
+                if(item.getKey()<=trip[1]){
+                    sum-=item.getValue();
+                    iterator.remove();
+                }
+            }
+            sum+=trip[0];
+            System.out.println(sum+">>>"+map);
+            if(sum>capacity)return false;
+        }
+        return true;
+    }
+    
+}
+
+```
+
+
+
+
+
+## 714. Best Time to Buy and Sell Stock with Transaction Fee(fail)
+
+动态规划
+
+```java
+ public int maxProfit(int[] prices, int fee) {
+        int res =0;
+        int cost=0;
+        int lastBuyTime=-1;
+        for(int i= 1;i<prices.length;i++){
+            if(prices[cost]>=prices[i]){
+                cost=i;
+            }else if(lastBuyTime==cost||lastBuy){
+                res+=prices[i]-prices[cost];
+                lastBuyTime=i;
+                cost=i;
+            }else{
+                if(prices[i]>prices[cost]+fee){
+                    res+=prices[i]-prices[cost]-fee;
+                    lastBuyTime=i;
+                    cost=i;
+                }
+            }
+            System.out.println(res);
+        }
+        return res;
+    }
+```
+
+```java
+class Solution {
+    public int maxProfit(int[] prices, int fee) {
+        int res =0;
+        int hold =-prices[0];
+        for(int i=1;i<prices.length;i++){
+            res = Math.max(res,hold+prices[i]-fee);
+            hold =Math.max(hold,res-prices[i]);
+        }
+        return res;
+    }
+}
+```
+
+
+
