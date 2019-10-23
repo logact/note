@@ -1,5 +1,9 @@
 # Greedy
 
+贪心算法可以说是一种特殊的动态规划，这类题目多以直接模拟这个算法过程就可以做出来。这种算法搭配的数据结构做多的是，优先队列。
+
+动态规划是一种相对于回溯算法来说的更优解。
+
 ## 392.Is Subsequence
 
 ## 455. Assign Cookies
@@ -239,6 +243,118 @@ class Solution {
     }
 }
 ```
+
+
+
+## 1007. Minimum Domino Rotations For Equal Row(23 more)
+
+没有将代码的细节构思好。
+
+## [452. 用最少数量的箭引爆气球](https://leetcode-cn.com/problems/minimum-number-of-arrows-to-burst-balloons/)（fail）
+
+区间问题调度问题:
+
+两种做法：
+
+1. 按起始点排序
+2. 按终端点排序
+
+## 
+
+## [991. 坏了的计算器](https://leetcode-cn.com/problems/broken-calculator/)(fail)
+
+math 逆向思维
+
+## 134.(20 min more)
+
+## 435.(fail)（！！！!）
+
+首先这是一个区间调度问题
+
+两种做法：（先要将区间排序,让这个问题方便使用动态规划或者是贪心算法）
+
+1. 使用动态规划求出每个到第i个区间的内含最多的合法区间
+2. 使用贪心算法计算对第i个区间进行判断是否保留这个区间
+
+动态规划与贪心算法之间的关系；
+
+贪心算法是一种特殊的动态规划（只与它前一次的状态有关）可以看这个题的解析
+
+## 1053 Previous Permutation With One Swap（fail)
+
+## 621 task schedule
+
+## 881.(10 min)
+
+## 767.(fail)（more）
+
+这个题的思路就是构造一个这样的字符串（而我一开始的时候一直想的是，一次将判断和返回的过程做完造成思维僵化）
+
+## 870.(fail)（more）
+
+两种做法都是贪心算法
+
+这个题的关键就是找到每个数组每个值在排序位置中对应 的位置（但是不能直接使用Arrays.sort来用下标排序，因为Arrays.sort 并没有传入一个比较器的函数形式）
+
+## 738.(30 min)
+
+## 659()
+
+题意不明。
+
+```java
+class Solution {
+    // 15:45
+    public boolean isPossible(int[] nums) {
+        int index = 1;
+        int count=0;
+        int lenN =nums.length;
+        while(index<lenN){
+            for(;index<lenN;index++){
+                if(nums[index]==nums[index-1]+1){
+                    count++;
+                    if(count==2){
+                        index+=2;
+                        System.out.println(index);
+                        count=0;
+                        break;
+                    }
+                }else{
+                    count=0;
+                }
+            }
+        }
+        if(index==lenN+1)return true;
+        return false;
+    }
+}
+```
+
+
+
+## 376（超时）
+
+易错点考虑特殊情况。
+
+## 55（success）
+
+## 649(fail)
+
+第一次读错题了。就是模拟这个过程。
+
+1. 用链表模拟？
+2. 用两个队列来模拟。
+3. 在数组用不同的值来标记
+
+## 948 (10 min)
+
+
+
+## 984 (20 min)
+
+
+
+
 
 
 
