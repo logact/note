@@ -20,7 +20,7 @@
 2. 易错点回文串在只剩下两个时候的判断
 3. 递归操作的走势。
 
-## 714.（ 14min）
+## 714.（14min）
 
 1. 有交易费用的买卖股票
 2. 使用贪心算法
@@ -58,4 +58,124 @@
 2. 回溯算法。
 
 ## 1130.fail
+
+## 646.（wrong）
+
+```java
+        Arrays.sort(pairs, Comparator.comparingInt(a -> a[0]));
+```
+
+如果是从后往前的dp就会增加复杂度。多了一个判断取最大值的过程。最好使用一个从前往后的方式。
+
+## 279.（ace)
+
+1.  完全背包
+2. 直接用dp
+3. the Lagrange's Four Square theorem
+
+## 740（wrong）	
+
+转换为打家劫舍
+
+每次删除残存最大的值，错误的做法。如果有较小的值很多的情况下
+
+error
+
+```java
+  // 9:52
+        // 123456
+        // 1236
+        int lenN=nums.length;
+        Arrays.sort(nums);
+        Set<Integer> set =new HashSet<Integer>();
+        for(int num:nums){
+            set.add(num);
+        }
+        int res=0;
+        for(int i=lenN-1;i>=0;i--){
+            if(!set.contains(nums[i]))continue;
+            set.remove(nums[i]);
+            res=res+nums[i];
+            if(set.contains(nums[i]-1)){
+                set.remove(nums[i]-1);
+            }
+            if(set.contains(nums[i]+1))
+            {
+                set.remove(nums[i]+1);
+            }
+        }
+        return res;
+    }
+    // [3,3,3,4,2]error
+}
+```
+
+
+
+## 486 (wrong)
+
+博弈问题 通用模板
+
+```java
+class Solution {
+    public boolean PredictTheWinner(int[] nums) {
+        // 10:08
+        int lenN=nums.length;
+        int[][]dp=new int[lenN+1][lenN+1];
+        //dp[i][j] dp[i+1][j]||dp[i][j-1];
+        int[]sum=new int[nums.length];
+        sum[0]=nums[0];
+        for(int i=1;i<lenN;i++){
+            sum[i]=sum[i-1]+nums[i];
+        }
+        for(int i=lenN-1;i>=0;i--){
+            for(int j=i;j<lenN;j++){
+                if(j==i+1){
+                    dp[i][j]=Math.max(nums[i],nums[j]);
+                }else if(i==j){
+                    dp[i][j]=nums[i];
+                    System.out.println(dp[i][j]);
+                }else if(j!=0){
+                    // int max=Math.max(dp[i+1][j],dp[i][j-1]);
+                    // dp[i][j]=sum[j]-sum[i]-max+nums[i];//这样就是放弃了先手的机会。
+                    dp[i][j]=Math.max(sum[j]-sum[i]-dp[i+1][j]+nums[i],sum[j]-sum[i]-dp[i][j-1]+nums[i]);
+                }
+            }
+        }
+        for(int i=0;i<lenN;i++){
+            for(int j=0;j<lenN;j++){
+                System.out.print(dp[i][j]+"--");
+                
+            }
+            System.out.println(">>>");
+        }
+        return dp[0][lenN-1]>=(sum[lenN-1]+1)/2;
+    }
+    
+}
+```
+
+
+
+## 264
+
+丑数之间的关系。构建丑的过程可以被规划为一个动态规划过程。
+
+丑数求解过程：先除二除到不能除为止，再除三除到不能除为止，再除五除到不能除。如果剩下的数为零那么这个数就是丑数。
+
+
+
+## 718
+
+与最长公共子序列不同?这个必须是前缀都相同。
+
+## 764（good problem）
+
+## 516
+
+
+
+
+
+
 
