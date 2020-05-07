@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html >
+    <head>
+    </head>
+    <body ng-controller='IndexController'>
+        <div >
+            <h1>moduleIndex {{moduleIndex}}</h1>
+            <h1 id='module1'></h1>
+            <h1 id='module2'></h1>
+        </div>
+
+    </body>
+    <script type="text/javascript"  src="../js/lib/require.js"></script>
+    <script type="text/javascript" src="../js/lib/config.js" ></script>
+    <script type="text/javascript" >
+        require(['angular'],()=>{
+            require(['index'],()=>{
+                angular.bootstrap(document,['app'])
+            })
+        })
+    </script>
+</html>
