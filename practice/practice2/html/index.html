@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+    <link rel="stylesheet" href="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/css/bootstrap.min.css">  
+	<script src="https://cdn.staticfile.org/jquery/2.1.1/jquery.min.js"></script>
+	<script src="https://cdn.staticfile.org/twitter-bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<head>
+</head>
+
+<body ng-controller='IndexController as ctrl'>
+    <table class="table table-bordered" style="margin: 10px;">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>登录账号</th>
+                <th>用户名</th>
+                <th>密码</th>
+                <th>性别</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr ng-repeat=" user in users">
+                <td ng-bind="$index+1">1</td>
+                <td>{{user.account}}</td>
+                <td>{{user.username}}</td>
+                <td>{{user.password}}</td>
+                <td>{{user.sex}}</td>
+                <td>
+                    <button type="button" ng-click='ctrl.delete()' class="btn btn-xs btn-link">删除</button>
+                    <button type="button" ng-click='ctrl.add()' class="btn btn-xs btn-link">添加</button>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    </body>
+<script type="text/javascript" src="../../lib/require.js"></script>
+<script type="text/javascript" src="../../lib/config.js"></script>
+<script type="text/javascript">
+    require(['angular','lodash'], () => {
+        require(['practice2/js/index'], () => {
+            angular.bootstrap(document, ['app'])
+        })
+    })
+</script>
+
+
+</html>

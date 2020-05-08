@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+</head>
+
+<body>
+    <h2>我的笔记</h2>
+    <div ng-controller='IndexController as ctrl'>
+        <!-- 可以使用ng-disabled 但是在scop更新的时候有时视图不会更新 -->
+        <textarea  ng-model="text"style='width: 300px;height: 100px;'></textarea>
+        <div>
+            <button ng-click='ctrl.save()'>保存</button>
+            <button ng-click='ctrl.read()'>读取</button>
+            <button ng-click="ctrl.delete()">删除</button>
+        </div>
+        <br>
+        <div style='font-size: small;'>剩余的字数：{{num}}</div>
+    </div>
+</body>
+<script type="text/javascript" src="../../lib/require.js"></script>
+<script type="text/javascript" src="../../lib/config.js"></script>
+<script type="text/javascript">
+    require(['angular','lodash'], () => {
+        require(['practice1/js/index'], () => {
+            angular.bootstrap(document, ['app'])
+        })
+    })
+</script>
+
+
+</html>
