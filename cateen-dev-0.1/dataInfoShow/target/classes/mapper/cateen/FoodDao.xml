@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.logact.cateen.dao.FoodDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.logact.cateen.entity.FoodEntity" id="foodMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="shopid" column="shopId"/>
+        <result property="shop" column="shop"/>
+        <result property="price" column="price"/>
+        <result property="score" column="score"/>
+        <result property="collectnum" column="collectNum"/>
+        <result property="descr" column="descr"/>
+        <result property="publishdate" column="publishDate"/>
+        <result property="upadatedate" column="upadateDate"/>
+        <result property="view" column="view"/>
+        <result property="images" column="images"/>
+    </resultMap>
+
+
+</mapper>

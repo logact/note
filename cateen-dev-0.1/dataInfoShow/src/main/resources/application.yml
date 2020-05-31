@@ -1,0 +1,16 @@
+server:
+  port: 8099
+mybatis-plus:
+  #信息输出设置
+  configuration:
+    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+  mapper-locations: classpath:mapper/*.xml
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/cateen?serverTimezone=GMT
+    username: root
+    password: Ljl2Mysql
+  data:
+    mongodb:
+      uri: mongodb://localhost:27017/cateen

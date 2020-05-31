@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.logact.cateen.dao.CuptonDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.logact.cateen.entity.CuptonEntity" id="cuptonMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="limitdesc" column="limitDesc"/>
+        <result property="scorelimit" column="scoreLimit"/>
+        <result property="levellimit" column="levelLimit"/>
+        <result property="scopelimit" column="scopeLimit"/>
+        <result property="singlelimit" column="singleLimit"/>
+        <result property="uselimit" column="useLimit"/>
+        <result property="publisherid" column="publisherId"/>
+        <result property="publishername" column="publisherName"/>
+        <result property="activityid" column="activityId"/>
+        <result property="type" column="type"/>
+    </resultMap>
+
+
+</mapper>

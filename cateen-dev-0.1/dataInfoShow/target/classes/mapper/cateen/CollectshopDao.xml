@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.logact.cateen.dao.CollectshopDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.logact.cateen.entity.CollectshopEntity" id="collectshopMap">
+        <result property="id" column="id"/>
+        <result property="shopid" column="shopId"/>
+        <result property="userid" column="userId"/>
+        <result property="shopname" column="shopName"/>
+        <result property="collectdate" column="collectDate"/>
+    </resultMap>
+
+
+</mapper>
