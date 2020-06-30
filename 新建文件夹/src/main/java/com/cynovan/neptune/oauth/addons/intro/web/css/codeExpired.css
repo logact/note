@@ -1,0 +1,17 @@
+.code_expired_body {
+    margin: 115px auto 20px auto;
+    width: 850px;
+    text-align: center;
+}
+
+.code_expired_img {
+    width: 244px;
+    height: 180px;
+    background: url("../img/codeexpired.png") no-repeat;
+    display: inline-block;
+}
+
+.expired_text {
+    font-size: 18px;
+    margin-top: 17px;
+}

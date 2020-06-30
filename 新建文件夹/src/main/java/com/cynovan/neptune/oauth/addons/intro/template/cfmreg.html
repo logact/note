@@ -1,0 +1,41 @@
+<template name="intro_cfmreg_template">
+    <div ng-controller="CfmRegController as ctrl" style="text-align: center">
+        <div class="cfmreg_body">
+            <img src="resource/intro/web/img/progress2.png">
+            <div class="message_content">
+                <div class="message" ng-if="checker.email">
+                    我们已经向您的邮箱:<span class="account-span">{{checker.email}}</span>发送了一封激活邮件<br>请点击邮件中的链接完成注册！
+                </div>
+                <div class="message" ng-if="checker.mobile">
+                    我们已经向您的手机号: <span class="account-span">{{checker.mobile}}</span>发送了激活验证码<br>输入验证码完成注册!
+                </div>
+                <div class="footer_buttons" ng-if="checker.email">
+                    <a ng-href="{{checker.mail_url}}" class="btn btn-primary btn-sm confirmBtn" target="_blank">
+                        进入邮箱激活
+                    </a>
+                    <button class="btn btn-default btn-sm resendbtn" ng-click="ctrl.resendRegisterEmail()" type="button">
+                        再次发送
+                    </button>
+                </div>
+                <div class="footer_buttons" ng-if="checker.mobile">
+                    <div class="checkcode_box">
+                        <input type="text" class="form-control code-input mousetrap" ng-model="info.captcha" placeholder="请输入4位数字验证码">
+                    </div>
+                    <div class="text-left" style="margin-top: 15px;padding-left: 105px;">
+                        <button class="btn btn-primary btn-sm confirmBtn" type="button"
+                                data-loading-text="<i class='fa fa-spinner fa-spin '></i> 处理中..."
+                                ng-click="ctrl.confirmRegister()">确认激活
+                        </button>
+                        <button class="btn btn-default btn-sm resendbtn"
+                                ng-click="ctrl.resendRegisterEmail()" type="button">
+                            再次发送验证码
+                        </button>
+                    </div>
+                </div>
+            </div>
+            <div class="intro-footer" style="margin-top: 50px;text-align: center;">
+                <p>粤ICP备16118320号</p> @工业设备物联云平台 2016
+            </div>
+        </div>
+    </div>
+</template>

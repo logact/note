@@ -1,0 +1,100 @@
+.retrieveBody {
+    margin: 115px auto 20px auto;
+    width: 850px;
+    background-color: #ffffff;
+}
+
+.retrieve_content {
+    text-align: center;
+}
+
+.retrieve_content .ui-label {
+    width: 80px;
+    text-align: right;
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 16px;
+    color: #6F6F6F;
+}
+
+.ui-label .mark_req {
+    font-weight: bold;
+    color: red;
+    margin-left: 5px;
+    color: #6F6F6F;
+    display: inline-block;
+}
+
+.retrieve_content .form-group {
+    margin-bottom: 28px;
+    position: relative;
+}
+
+.retrieveform .form-control {
+    background-position: 10px center;
+    width: 360px;
+    display: inline-block;
+    border-radius: 2px;
+    padding-left: 33px;
+}
+
+.footer_buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.checkcode_box {
+    text-align: center;
+    position: relative;
+    margin-left: 25px;
+}
+
+.retrieve-code-input {
+    width: 240px !important;
+}
+
+.retrieveContents {
+    height: 490px;
+}
+
+.retrieveContents .confirmBtn {
+    border-radius: 2px;
+    height: 36px;
+    font-size: 14px;
+    width: 200px;
+    line-height: 25px;
+    box-shadow: 0 0 3px #52DC90;
+    margin-left: 10px;
+}
+
+.content {
+    height: 100%;
+    text-align: left !important;
+    font-size: 20px;
+    color: #6F6F6F;
+    padding-bottom: 15px;
+    padding-left: 10px;
+    padding-top: 5px;
+    margin-bottom: 30px;
+    border-bottom: 1px dashed #DDDDDD;
+}
+
+.username-input {
+    background: url("../img/profile.png") no-repeat;
+}
+
+.password-input {
+    background: url("../img/padlock.png") no-repeat;
+}
+
+.sendCodeBtn {
+    padding: 7px 12px;
+    vertical-align: top;
+}
+
+.send-code-box {
+    display: inline-block;
+    text-align: right;
+    width: 116px;
+    vertical-align: top;
+}

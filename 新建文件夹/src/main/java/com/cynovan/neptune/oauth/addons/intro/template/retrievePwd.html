@@ -1,0 +1,55 @@
+<template name="retrievePwd_template">
+    <div class="retrieveBody" ng-controller="RetrievePwdController as ctrl">
+        <div class="active step">
+            <div class="content">
+                <div class="title">
+                    重置密码
+                </div>
+            </div>
+        </div>
+        <div class="retrieveContents">
+            <form class="retrieve_content retrieveform" autocomplete="off">
+                <div class="col-xs-12 form-group username-box">
+                    <span class="ui-label control-label">账 号<span class="mark_req">*</span></span>
+                    <input type="text" class="form-control username-input mousetrap" ng-model="info.account" name="username"
+                           placeholder="请输入邮箱或手机号"/>
+                </div>
+                <div class="col-xs-12 form-group code-box">
+                    <span class="ui-label control-label">验证码<span class="mark_req">*</span></span>
+                    <input type="text" class="form-control retrieve-code-input mousetrap" ng-model="info.code"
+                           placeholder="请输入4位数字验证码">
+                    <div class="send-code-box">
+                        <button class="btn btn-default btn-sm btn-outline sendCodeBtn"
+                                ng-click="ctrl.sendCode()" type="button">
+                            获取验证码
+                        </button>
+                    </div>
+                </div>
+                <div class="col-xs-12 form-group password-box">
+                    <span class="ui-label control-label">新密码<span class="mark_req">*</span></span>
+                    <input type="password" class="form-control password-input mousetrap" ng-model="info.pwd1" name="new_account_pwd1"
+                           placeholder="请输入至少6位新密码"/>
+                </div>
+                <div class="col-xs-12 form-group password-box">
+                    <span class="ui-label control-label">确认密码<span class="mark_req">*</span></span>
+                    <input type="password" class="form-control password-input mousetrap" ng-model="info.pwd2" name="new_account_pwd2"
+                           placeholder="请确认密码"/>
+                </div>
+                <div class="col-xs-12">
+                    <button class="btn btn-primary btn-sm confirmBtn" type="button" ng-click="ctrl.confirmModify()">确定</button>
+                </div>
+            </form>
+        </div>
+        <div class="intro-footer" style="margin-top: 50px;text-align: center;">
+            <p>粤ICP备16118320号</p> @工业设备物联云平台 2016
+        </div>
+    </div>
+</template>
+<template name="neptune_checkcode_mail_template">
+    <div>
+        <h2>您好</h2>
+        <div style="font-size: 15px;">
+            您本次操作的验证码为:<h3>%s</h3>
+        </div>
+    </div>
+</template>

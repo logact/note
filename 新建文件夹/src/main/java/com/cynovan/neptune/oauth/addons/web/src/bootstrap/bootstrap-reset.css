@@ -1,0 +1,43 @@
+/*By Aric.chen*/
+
+@charset "UTF-8";
+
+.form-group {
+    margin-bottom: 10px;
+}
+
+.modal-footer {
+    text-align: center;
+}
+
+.form-group .control-label {
+    margin-top: 4px;
+}
+
+.btn {
+    background-image: none !important;
+    text-shadow: none !important;
+    box-shadow: none !important;
+}
+
+.hide {
+    display: none !important;
+}
+
+[ng\:cloak], [ng-cloak], [data-ng-cloak], [x-ng-cloak],
+.ng-cloak, .x-ng-cloak,
+.ng-hide:not(.ng-hide-animate) {
+    display: none !important;
+}
+
+ng\:form {
+    display: block;
+}
+
+.ng-animate-shim {
+    visibility: hidden;
+}
+
+.ng-anchor {
+    position: absolute;
+}

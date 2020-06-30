@@ -1,0 +1,95 @@
+<template name="intro_register_template">
+    <div ng-controller="RegisterController as ctrl" class="text-center">
+        <div class="register_body animated fadeInDown">
+            <img src="resource/intro/web/img/progress1.png">
+            <form class="register_content" id="regform" autocomplete="off">
+                <div class="row">
+                    <div class="col-xs-12 form-group username-box">
+                        <span class="ui-label control-label">账 户<span class="mark_req">*</span></span>
+                        <input type="text" class="form-control  telephone-input mousetrap" ng-model="user.username" name="username"
+                               placeholder="请输入邮箱或手机号"
+                        />
+                    </div>
+                    <div class="col-xs-12 form-group name-box">
+                        <span class="ui-label control-label">姓 名<span class="mark_req">*</span></span>
+                        <input type="text" class="form-control username-input mousetrap" ng-model="user.name" name="name" placeholder="请输入姓名"/>
+                    </div>
+                    <div class="col-xs-12 form-group password-box">
+                        <span class="ui-label control-label">密 码<span class="mark_req">*</span></span>
+                        <input type="password" class="form-control password-input mousetrap" ng-model="user.password" name="account_password1"
+                               placeholder="请输入至少6位密码"/>
+                    </div>
+                    <div class="col-xs-12 form-group password-box">
+                        <span class="ui-label control-label">密码确认<span class="mark_req">*</span></span>
+                        <input type="password" class="form-control password-input mousetrap" ng-model="user.password1" name="account_password2"
+                               placeholder="请确认密码"/>
+                    </div>
+                    <div class="col-xs-12 form-group" style="margin-bottom: 10px;">
+                        <span class="ui-label" style="margin-left: -234px;"><span class="mark_req"></span></span>
+                        <div class="checkbox checkbox-primary checkbox-inline">
+                            <input type="checkbox" id="agree_term" name="agree_term" ng-model="user.agree_term">
+                            <label for="agree_term" class="control-label">我同意<a href="intro#/term" target="_blank">服务条款</a></label>
+                        </div>
+                    </div>
+                    <div class="col-xs-12 form-group" style="padding-left: 175px;">
+                        <button class="btn btn-primary btn-sm regbtn"
+                                data-loading-text="<i class='fa fa-spinner fa-spin '></i> 处理中..."
+                                type="button" ng-click="ctrl.register()">下一步
+                        </button>
+                        <div class="register_error">
+                            该账户已被注册,重新输入或直接<a href='intro/#/login'>登录</a>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="intro-footer" style="margin-top: 50px;text-align: center;">
+                <p>粤ICP备16118320号</p> @工业设备物联云平台 2016
+            </div>
+        </div>
+    </div>
+</template>
+<template name="user_register_checker_email_template">
+    <div>
+        <h2>%s,您好</h2>
+        <div style="font-size: 15px;">
+            您已注册工业设备物联云平台！请点击以下链接完成验证：<a href="%s">激活邮箱</a>
+        </div>
+    </div>
+</template>
+<template name="email_template">
+    <table border="0" cellpadding="0" bgcolor="#fff" cellspacing="0" width="100%" align="center">
+        <tbody>
+        <tr>
+            <td>
+                <table border="0" cellpadding="0" cellspacing="0" width="740" align="center" style="border: 1px #ddd solid">
+                    <tbody>
+                    <tr>
+                        <td>
+                            <img src="${url}" />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td align="center" style="padding:25px 0 60px;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="720">
+                                <tbody>
+                                <tr>
+                                    <td>
+                                        ${(message)!}
+                                    </td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td bgcolor="#83bbf5" style="height:100px;">
+
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</template>

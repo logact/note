@@ -1,0 +1,146 @@
+.join_group_body {
+    margin: 115px auto 20px auto;
+    width: 900px;
+    text-align: center;
+    background-color: #ffffff;
+}
+
+.joinGroupTab {
+    margin: 50px auto;
+    text-align: center;
+    width: 850px;
+}
+
+.joinGroupTab .nav-tabs li {
+    margin-right: 50px;
+    font-size: 18px;
+}
+
+.joinGroupTab .nav-tabs li:first-child {
+    /*margin-left: 142px;*/
+}
+
+.joinGroupTab .row {
+    margin-top: 15px;
+}
+
+.mark_req {
+    font-weight: bold;
+    color: red;
+    margin-left: 5px;
+}
+
+.joinGroupTab .form-control {
+    width: 380px;
+    display: inline-block;
+    border-radius: 2px;
+    height: 38px;
+    font-size: 14px;
+}
+
+.joinGroupTab .ui-label {
+    color: #6F6F6F;
+    padding-top: 8px;
+    font-size: 15px;
+}
+
+.regbtn {
+    border-radius: 2px;
+    width: 160px;
+    height: 44px;
+    background: #87c2ff;
+    border: 1px #87c2ff;
+    font-size: 14px;
+    line-height: 33px;
+    box-shadow: 0 0 3px #87c2ff;
+    width: 380px;
+}
+
+.regbtn:hover {
+    background: #66b1ff;
+    border-color: #66b1ff;
+}
+
+.createCompanyBox {
+    display: none;
+    border-top: 1px dotted #ddd;
+    border-bottom: 1px dotted #ddd;
+    margin-bottom: 10px;
+}
+
+.errorBox {
+    color: #9F3A38;
+    margin-left: 10px;
+    font-size: 13px;
+    height: 37px;
+    vertical-align: top;
+    line-height: 25px;
+    position: absolute;
+    left: 260px;
+    top: 6px;
+    width: 200px;
+}
+
+.createForm {
+    text-align: left;
+    margin-left: 50px;
+}
+
+.searchGroup {
+    height: 44px;
+    width: 300px;
+    border-radius: 0px;
+    display: inline-block;
+}
+
+.searchBtn {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+    width: 50px;
+    height: 38px;
+    background: #87c2ff;
+    border: 1px #87c2ff;
+    font-size: 14px;
+    box-shadow: 0 0 3px #87c2ff;
+    display: inline-block;
+    vertical-align: top;
+    margin-left: -5px;
+}
+
+.errorMessage {
+    display: inline;
+    color: red;
+    letter-spacing: 1px;
+    font-size: 14px;
+    padding-left: 10px;
+}
+
+.searchBtn:hover {
+    background: #66b1ff;
+    border-color: #66b1ff;
+}
+
+.join_company_body {
+    width: 850px;
+    margin: 0 auto;
+    margin-top: 40px;
+}
+
+.company_table {
+    margin-top: 70px;
+}
+
+.create_success {
+    padding-left: 76px;
+    margin-top: 10px;
+    font-size: 16px;
+    color: #35D672;
+}
+
+.company_search_alert {
+    display: inline-block;
+    margin-left: 15px;
+    font-size: 15px;
+}

@@ -1,0 +1,30 @@
+.neptune-register-index .neptune-header {
+    height: 50px;
+    background-color: #ffffff;
+}
+
+.header-one-pic {
+    display: inline-block;
+    height: 50px;
+    width: 30px;
+    margin-left: 20px;
+    background: url("../img/header_one.png") center no-repeat;
+    background-size: 25px;
+}
+
+.header-two-pic {
+    display: inline-block;
+    height: 50px;
+    width: 150px;
+    margin-left: 10px;
+    background: url("../img/header_two.png") center no-repeat;
+    background-size: 150px 25px;
+}
+
+.neptune-body {
+    position: absolute;
+    height: calc(100% - 50px);
+    width: 100%;
+    background: url("../img/login_background.jpg") center no-repeat;
+    background-size: cover !important;
+}

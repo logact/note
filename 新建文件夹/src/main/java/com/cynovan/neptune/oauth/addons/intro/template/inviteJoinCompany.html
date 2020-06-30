@@ -1,0 +1,37 @@
+<template name="invite_join_company_template">
+    <div ng-controller="InviteJoinCompanyController as ctrl" class="invite_body">
+        <div ng-if="!info" class="invite_invalid_link">
+            链接已失效, 准备跳转到登陆页面...
+        </div>
+
+        <div ng-if="info" class="invite_join_company">
+            <div class="invite_title">
+                {{ info.to }} 您好， {{ info.from }} 邀请您加入团队： <span>{{ info.company_name }} </span>
+            </div>
+            <div class="invite_info">
+                <i class="fa fa-info-circle"></i> 请设置登陆密码，点击接受，即可完成加入。
+            </div>
+            <div class="row" style="margin-bottom: 20px;">
+                <div class="col-xs-4" style="text-align: right">
+                    <span class="ui-label control-label">密码</span>
+                </div>
+                <div class="col-xs-8" style="text-align: left">
+                    <input type="password" class="form-control password-input" name="join_company_password" ng-model="entity.password" autocomplete="off"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-xs-4" style="text-align: right">
+                    <span class="ui-label control-label">确认密码</span>
+                </div>
+                <div class="col-xs-8" style="text-align: left">
+                    <input type="password" name="confirm_password" class="form-control password-input" ng-model="entity.password1" autocomplete="off"/>
+                </div>
+                <div class="col-xs-8 col-xs-offset-4" style="text-align: left;">
+                    <button class="btn btn-primary btn-sm invite_btn" type="button" ng-click="ctrl.accept()"> 接受</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+</template>
+

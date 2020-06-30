@@ -1,0 +1,96 @@
+.cfmreg_body {
+    margin: 115px auto 20px auto;
+    width: 850px;
+    background-color: #ffffff;
+    padding-top: 20px;
+    padding-bottom: 30px;
+}
+
+.w140 {
+    width: 145.91px !important;
+}
+
+.intervalbtn {
+}
+
+.code-input {
+    height: 35px;
+    width: 413px;
+    line-height: 44px;
+    border-radius: 2px;
+    border: 1px #ddd solid;
+    display: inline-block;
+}
+
+.errorBox {
+    color: #9F3A38;
+    margin-left: 10px;
+    font-size: 13px;
+    height: 37px;
+    vertical-align: top;
+    line-height: 25px;
+    position: absolute;
+    left: 495px;
+    top: 6px;
+    width: 200px;
+}
+
+.details {
+    padding: 18px 1px 9px 45px;
+    color: #A0A0A0;
+    text-align: right;
+    font-size: 14px;
+    border-bottom: 1px solid #E5E5E5;
+    width: 1221px;
+    margin: 100px auto 50px;
+}
+
+.message_content {
+    color: #6F6F6F;
+    width: 600px;
+    margin: 45px auto 0 auto;
+}
+
+.message {
+    font-size: 18px;
+    text-align: center;
+}
+
+.footer_buttons {
+    margin-top: 20px;
+    text-align: center;
+}
+
+.confirmBtn {
+    border-radius: 2px;
+    width: 160px;
+    height: 44px;
+    background: #87c2ff;
+    border: 1px #87c2ff;
+    font-size: 14px;
+    line-height: 33px;
+    box-shadow: 0 0 3px #87c2ff;
+}
+
+.confirmBtn:hover {
+    background: #66b1ff;
+    border-color: #66b1ff;
+}
+
+.resendbtn {
+    height: 44px;
+    font-size: 14px;
+    line-height: 33px;
+    margin-left: 40px;
+    width: 160px;
+}
+
+.checkcode_box {
+    text-align: left;
+    padding-left: 77px;
+    position: relative;
+}
+
+.account-span {
+    color: #87c2ff !important;
+}

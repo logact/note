@@ -1,0 +1,92 @@
+.register_body {
+    margin: 115px auto 20px auto;
+    width: 850px;
+    text-align: center;
+    background-color: #ffffff;
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+#regform {
+    margin-top: 45px;
+}
+
+#regform .form-control {
+    background-position: 10px center;
+    width: 360px;
+    display: inline-block;
+    border-radius: 2px;
+    padding-left: 33px;
+}
+
+.register_content .ui-label {
+    width: 150px;
+    text-align: right;
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 16px;
+    color: #6F6F6F;
+}
+
+.ui-label .mark_req {
+    font-weight: bold;
+    color: red;
+    margin-left: 5px;
+    color: #6F6F6F;
+    display: inline-block;
+}
+
+.register_content .form-group {
+    margin-bottom: 25px;
+    position: relative;
+}
+
+.regbtn {
+    border-radius: 2px;
+    width: 365px;
+    height: 44px;
+    font-size: 15px;
+    color: #FFF;
+    background: #87c2ff;
+    border: 1px #87c2ff solid;
+    box-shadow: 0 0 5px #87c2ff;
+}
+
+.regbtn:hover {
+    background: #66b1ff;
+    border-color: #66b1ff;
+}
+
+.inline.field {
+    position: relative;
+}
+
+.details {
+    padding: 18px 1px 9px 45px;
+    color: #A0A0A0;
+    text-align: right;
+    font-size: 14px;
+    border-bottom: 1px solid #E5E5E5;
+    width: 1221px;
+    margin: 100px auto 50px;
+}
+
+.telephone-input {
+    background: url("../img/33.png") no-repeat;
+}
+
+.username-input {
+    background: url("../img/profile.png") no-repeat;
+}
+
+.password-input {
+    background: url("../img/padlock.png") no-repeat;
+}
+
+.register_error {
+    margin-top: 10px;
+    text-align: left;
+    padding-left: 163px;
+    color: red;
+    display: none;
+}

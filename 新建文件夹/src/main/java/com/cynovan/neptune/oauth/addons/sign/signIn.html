@@ -1,0 +1,67 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <base href="${c_path}">
+    <title>工业设备物联云平台-登录</title>
+    <meta name="decorator" content="default"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="${r_path}web/img/ico.png" type="image/x-icon"/>
+    <link type="text/css" rel="stylesheet" href="${r_path}web/dist/css/libs.css?v=${version}"/>
+    <link type="text/css" rel="stylesheet" href="${r_path}sign/web/css/signin.css?v=${version}"/>
+</head>
+<style>
+
+</style>
+<body>
+<div class="neptune-login-index " ng-cloak="" ng-controller="SignInController as ctrl">
+    <div class="neptune-header">
+        <div class="header-one-pic"></div>
+        <div class="header-two-pic"></div>
+    </div>
+    <div class="neptune-body">
+        <div class="login-body">
+            <div class="login-left"></div>
+            <div class="login-right" ng-cloak>
+                <form class="login-form" id="signInForm" action="/authenticate" method="post">
+                    <input type="hidden" name="redirect_uri" id="redirect_uri"/>
+                    <div class="login-change-mode">
+                        <span ng-click="ctrl.changeLoginMode('pwd')" ng-class="loginMode==='pwd'?'active':''">密码登录</span>
+                        <span ng-hide="true" ng-click="ctrl.changeLoginMode('msg')" ng-class="loginMode==='msg'?'active':''">短信登录/注册</span>
+                    </div>
+                    <div class="login-phone">
+                        <input name="username" ng-model="entity.username" placeholder="手机号码" required>
+                    </div>
+                    <div class="login-pwd" ng-if="loginMode==='pwd'">
+                        <input name="password" ng-model="entity.password" type="password" placeholder="密码" required>
+                    </div>
+                    <div class="login-code" ng-if="loginMode==='msg'">
+                        <input name="code" ng-model="entity.code" placeholder="验证码" required>
+                        <span class="get-code" ng-click="ctrl.calcResendState()">获取验证码</span>
+                    </div>
+                    <div class="pass-fgtpwd">
+                        <div class="pull-right">
+                            <a href="intro#/retrievePwd">忘记密码?</a>
+                        </div>
+                    </div>
+                    <input type="button" class="login-confirm" value="登录" ng-click="ctrl.login()">
+                </form>
+            </div>
+
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var cynovan = {r_path: "${r_path}", c_path: "${c_path}", version: "${version}", debug: "${debug?c}"};
+</script>
+<script type="text/javascript" src="resource/web/dist/libs.js?v=${version}"></script>
+<script type="text/javascript" src="resource/web/requirejs/require.js?v=${version}"></script>
+<script type="text/javascript" src="resource/web/requirejs/config.js?v=${version}"></script>
+<script type="text/javascript">
+    require(['sign/web/signin'], function () {
+        angular.bootstrap(document, ['signin']);
+    });
+</script>
+</html>

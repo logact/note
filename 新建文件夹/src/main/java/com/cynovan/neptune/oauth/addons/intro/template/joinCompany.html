@@ -1,0 +1,34 @@
+ <template name="join_company_template">
+    <div ng-controller="JoinCompanyController" class="join_company_body">
+        <div class="ui container segment">
+            <div class="ui row">
+                <div class="ui action input company_search">
+                    <input ng-model="options.text" type="text" placeholder="请输入关键字,多关键字以空格隔开...">
+                    <button class="ui button" ng-click="search()">搜索</button>
+                </div>
+            </div>
+
+            <div class="ui row company_table">
+                <table class="c-table ui celled table" cellspacing="0" width="100%">
+                    <thead>
+                    <tr>
+                        <th ng-repeat="column in options.columns">
+                            {{ column.title }}
+                        </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr ng-repeat="data in datas">
+                        <td>{{ data.name }}</td>
+                        <td>{{ data.email }}</td>
+                        <td>{{ data.mobile }}</td>
+                        <td>
+                            <button class="ui green button" ng-click="joinCompany($index)">申请加入</button>
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</template>

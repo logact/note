@@ -1,0 +1,44 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <base href="${c_path}">
+    <title>工业设备物联云平台-注册</title>
+    <meta name="decorator" content="default"/>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="initial-scale=1.0, user-scalable=no">
+    <link rel="shortcut icon" href="${r_path}web/img/ico.png" type="image/x-icon"/>
+    <link type="text/css" rel="stylesheet" href="${r_path}web/dist/css/libs.css?v=${version}"/>
+    <link type="text/css" rel="stylesheet" href="${r_path}web/base/c-ui.css?v=${version}"/>
+    <link type="text/css" rel="stylesheet" href="${r_path}intro/web/css/intro.css?v=${version}"/>
+</head>
+<style>
+
+</style>
+<body>
+<div class="neptune-register-index ">
+    <div class="neptune-header">
+        <div class="header-one-pic"></div>
+        <div class="header-two-pic"></div>
+    </div>
+    <div class="neptune-body">
+        <div ng-view>
+
+        </div>
+    </div>
+</div>
+</body>
+<script type="text/javascript">
+    var cynovan = {r_path: "${r_path}", c_path: "${c_path}", version: "${version}", debug: "${debug?c}"};
+</script>
+<script type="text/javascript" src="resource/web/dist/libs.js?v=${version}"></script>
+<script type="text/javascript" src="resource/web/requirejs/require.js?v=${version}"></script>
+<script type="text/javascript" src="resource/web/requirejs/config.js?v=${version}"></script>
+<script type="text/javascript">
+    require(['web/build/entry-build'], function () {
+        require(['intro/web/js/intro'], function () {
+            angular.bootstrap(document, ['intro']);
+        });
+    });
+</script>
+</html>

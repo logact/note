@@ -1,0 +1,61 @@
+.invite_body {
+    margin: 120px auto 0 auto;
+    text-align: center;
+    width: 850px;
+}
+
+.invite_invalid_link {
+    padding: 5px;
+    font-size: 2em;
+    color: #6F6F6F;
+}
+
+.invite_btn {
+    border-radius: 2px;
+    height: 44px;
+    margin-top: 30px;
+    font-size: 15px;
+    color: #FFF;
+    background: #87c2ff;
+    border: 1px #87c2ff solid;
+    box-shadow: 0 0 5px #87c2ff;
+    width: 360px;
+}
+
+.invite_join_company .invite_title {
+    margin-top: 40px;
+    font-size: 20px;
+    color: #6F6F6F;
+}
+
+.invite_join_company .invite_info {
+    margin-top: 20px;
+    margin-bottom: 40px;
+    font-size: 14px;
+    color: #828791;
+}
+
+.password-input {
+    background: url("../img/padlock.png") no-repeat;
+}
+
+.invite_body .form-control {
+    background-position: 10px center;
+    width: 360px;
+    display: inline-block;
+    border-radius: 2px;
+    padding-left: 33px;
+}
+
+.invite_body .ui-label {
+    width: 80px;
+    text-align: right;
+    margin-right: 10px;
+    display: inline-block;
+    font-size: 16px;
+    color: #6F6F6F;
+}
+
+.invite_info .fa {
+    color: #82EBB2;
+}
